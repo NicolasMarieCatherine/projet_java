@@ -33,7 +33,7 @@ public class Login {
         this.pwd=pwd;
     }
 
-    public void GetUserPwd(){
+    public void creerAvatar(){
 
         boolean validation = false; 
          while (!validation){
@@ -52,16 +52,16 @@ public class Login {
                     throw new InputException("Votre nom ou mot ne doit pas dépasser 10 caractères !  ");
                 }
 
-                ArrayList<String> lignes = new ArrayList<String>();
-                lignes.add("\n \n");
-                lignes.add("Nom:"+nom_user);
-                lignes.add("\nPwd:"+pwd_user);  
+                //ArrayList<String> lignes = new ArrayList<String>();
+                //lignes.add("\n \n");
+                //lignes.add("Nom:"+nom_user);
+                //lignes.add("\nPwd:"+pwd_user);  
 
                 validation=true;
                 SetLogin(nom_user);
                 SetPwd(pwd_user);
 
-            }catch (IOException |  InputException e){
+            }catch (InputException e){
                 System.out.println(e);
             }
          }
@@ -76,7 +76,7 @@ public class Login {
             
             try {
 
-                BufferedReader reader = new BufferedReader(new FileReader(new File("profile.txt")));
+                //BufferedReader reader = new BufferedReader(new FileReader(new File("profile.txt")));
                 String ligne;
 
                 System.out.println("\n");
@@ -88,7 +88,7 @@ public class Login {
                 String pwd_user = scan.nextLine();
 
                 //
-                while((ligne = reader.readLine()) != null){
+                /*while((ligne = reader.readLine()) != null){
 
                     if(ligne.startsWith("Nom:")){
                         String temp[] = ligne.split(":");
@@ -107,20 +107,16 @@ public class Login {
                     }
 
                 }
-
-                validation = true ;
-
-                //
-
-                /* 
+                */
+            
                 if((this.login.equals(nom_user)) & (this.pwd.equals(pwd_user)) ){
                     validation = true;  
                 }else {
                     throw new LoginException("Nom ou mot de passe invalide ! . Recommencer \n");
                 }  
-                */
+                
 
-            }catch (LoginException | IOException error){
+            }catch (LoginException error ){ // | IOException error){
                 System.out.println(error);
             }
         }
@@ -131,7 +127,7 @@ public class Login {
     public static void main(String args[]){
         
         Login login = new Login();
-        //login.GetUserPwd();
+        login.creerAvatar();
         login.Authentification();
     }
 } 

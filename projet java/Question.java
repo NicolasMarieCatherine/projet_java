@@ -10,7 +10,8 @@ public class Question {
         "Quel est le résultat de 652 : 2 ? ", // 365 326 226
         "Quel est le résultat de 1 H 40 + 1 H 40 ? (en min) ", // 280 200 300
         "Si le rayon d'un cercle mesure 10 cm, combien mesure son diamètre ? ", // 20cm 100cm 25cm
-        "Un triangle équilatéral a ... ",// 3 cotés égaux , 1 angle droit , 2 cotés égaux 
+        "Un triangle équilatéral a ... ",// 3 cotés égaux , 1 angle droit , 2 cotés égaux
+         
     };
 
     public String liste_reponse_math[];
