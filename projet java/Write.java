@@ -14,8 +14,10 @@ public class Write {
             int Age = 21;
             ArrayList<String> lignes = new ArrayList<String>();
             lignes.add("\nNom : "+nom);
-            lignes.add("\nAge : "+Age);  
-            File file = new File("profile.txt");
+            lignes.add("\nAge : "+Age); 
+            
+            String path="profile/"+nom+".txt";
+            File file = new File(path);
 
             FileWriter writer = new FileWriter(file,true);
 

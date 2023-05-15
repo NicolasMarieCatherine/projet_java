@@ -33,6 +33,19 @@ public class Login {
         this.pwd=pwd;
     }
 
+    public int start(){
+
+		System.out.print("\033c");
+
+		Scanner sc = new Scanner(System.in);
+
+        System.out.print(
+            "\t\tSERIOUS GAME\n\n\tMENU :\n\n1 - Creer un avatar.\n2 - Creer une question.\n3 - Quitter\n\nRéponse : ");
+        int reponse = sc.nextInt();
+
+        return reponse ;
+    }
+
     public void creerAvatar(){
 
         boolean validation = false; 
@@ -48,18 +61,19 @@ public class Login {
                 System.out.println("Saisir votre mot de passe  : ");
                 String pwd_user = scan.nextLine();
 
-                if ((nom_user.length() > 10) || (pwd_user.length() > 10)){
-                    throw new InputException("Votre nom ou mot ne doit pas dépasser 10 caractères !  ");
+                if ((nom_user.length() > 10)){
+                    throw new InputException("Votre nom ne doit pas dépasser 10 caractères !  ");
+                }else{
+
+                    validation=true;
+                    SetLogin(nom_user);
+                    SetPwd(pwd_user);
                 }
 
                 //ArrayList<String> lignes = new ArrayList<String>();
                 //lignes.add("\n \n");
                 //lignes.add("Nom:"+nom_user);
                 //lignes.add("\nPwd:"+pwd_user);  
-
-                validation=true;
-                SetLogin(nom_user);
-                SetPwd(pwd_user);
 
             }catch (InputException e){
                 System.out.println(e);
@@ -77,7 +91,7 @@ public class Login {
             try {
 
                 //BufferedReader reader = new BufferedReader(new FileReader(new File("profile.txt")));
-                String ligne;
+                //String ligne;
 
                 System.out.println("\n");
                 System.out.println("== Connexion ==");
@@ -125,10 +139,8 @@ public class Login {
         return true ;
     } 
     public static void main(String args[]){
+
         
-        Login login = new Login();
-        login.creerAvatar();
-        login.Authentification();
     }
 } 
 
