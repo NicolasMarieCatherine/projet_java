@@ -10,7 +10,6 @@ public class Question {
             "Quel est le résultat de 1 H 40 + 1 H 40 ? (en min) ", // 280 200 300
             "Si le rayon d'un cercle mesure 10 cm, combien mesure son diamètre ? ", // 20cm 100cm 25cm
             "Un triangle équilatéral a ... ",// 3 cotés égaux , 1 angle droit , 2 cotés égaux
-            // sdfsdfsdsdf
     };
 
     public String liste_reponse_math[];
@@ -34,13 +33,13 @@ public class Question {
         System.out.printf(
                 "-------------------------------------------------------------------------------------------------%n");
 
-        for (int i = 0; i < this.liste_questions.length; i++) {
+        for (int i = 0; i < this.liste_questions_math.length; i++) {
 
             Random random = new Random();
-            int nb_random = random.nextInt(this.liste_questions.length);
+            int nb_random = random.nextInt(this.liste_questions_math.length);
 
-            tableau[i] = this.liste_questions[nb_random];
-            tableau_reponse[i] = this.liste_reponses[nb_random];
+            tableau[i] = this.liste_questions_math[nb_random];
+            tableau_reponse[i] = this.liste_reponses_math[nb_random];
             System.out.printf("| %-70s | %-20s |\n", tableau[i], tableau_reponse[i]);
         }
         ;
