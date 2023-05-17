@@ -1,0 +1,5 @@
+
+Nom :flo
+Mdp :qsd
+Points de vie :1
+Moyenne :1.0
