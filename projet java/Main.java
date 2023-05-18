@@ -17,7 +17,7 @@ public class Main {
 
             Avatar avatar = new Avatar();
 
-            if (reponse == 1){
+            if (reponse == 1){ // Creer avatar
 
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
@@ -26,31 +26,50 @@ public class Main {
 
                 ;}
 
-            if (reponse == 2){
+            if (reponse == 2){ // Se connecter
 
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
 
                 avatar.Connexion();
             }
-            if (reponse == 3){
+            if (reponse == 3){ // afficher liste avatar
 
-                System.out.print("\033[H\033[2J");
+                System.out.print("\033[H\033[2J")   ;
                 System.out.flush();
 
                 avatar.Liste();
-                avatar.Est_vivant("Nicolas");
+            
+            }
+            if (reponse == 4){ // admin
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+
+                avatar.Connexion();
 
             }
-            if (reponse == 4){}
-            if (reponse == 5){validation=false;}
+            if (reponse == 5){
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+                System.out.println("Fermeture ....");
+
+                try {
+                    // Adding a 3-second delay (3000 milliseconds)
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    // Handle the exception
+                    e.printStackTrace();
+                }
+
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+                validation=false;} // Quitter
 		}
 
     }
     
 }
 
-// TODO avatar connexion /
 
 /*
  *          1 Creer avatar  - Fait
@@ -61,9 +80,10 @@ public class Main {
  *              | ------> lancer defi , qcm etc ...
  *              
  * 
- *          3 Afficher liste avatar  - X
+ *          3 Afficher liste avatar  - Fait
  *          
  *          4 Admin  - X
+ *              |______> 
  * 
  *          5 Quitter  - Fait
  * 

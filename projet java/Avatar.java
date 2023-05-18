@@ -56,13 +56,6 @@ public class Avatar {
         
         ;}
         
-        try {
-            // Adding a 3-second delay (3000 milliseconds)
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            // Handle the exception
-            e.printStackTrace();
-        }
         
         return est_vivant ;
     }
@@ -228,17 +221,42 @@ public class Avatar {
     }
 
     public void Liste(){
+    
+       
+        File chemin_dossier = new File("profile/");
+        String liste_fichier[] = chemin_dossier.list();
 
-
-        System.out.printf("%n----------------------------------------------------------------\n");
-        System.out.printf("| %-60s |\n", "\t\tListe des avatars");
+        System.out.printf("\n\nListe des avatars existants  \n");
+        System.out.println("Nombre de d'avatar  : "+liste_fichier.length+"\n\n");
+        
         System.out.printf("----------------------------------------------------------------\n");
+        System.out.printf("| %-24s %-35s |\n","Nom","En vie ?");
+        System.out.printf("----------------------------------------------------------------\n");
+
+        
+
+        try {
+
+            for(int i=0; i<liste_fichier.length; i++) {
+
+                String fichier[] = liste_fichier[i].split(".txt");
+                boolean est_vivant = Est_vivant(fichier[0]);
+                System.out.printf("| %-24s %-35b |\n",fichier[0],est_vivant);
+
+            }
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        System.out.printf("----------------------------------------------------------------\n\n");
+        System.out.printf("Quitter --> (exit) ");
+
 
         Scanner sc = new Scanner(System.in);
         String reponse = sc.nextLine();
-
-        if ( reponse.equals("q")){return;}
-
+        if ( reponse.equals("exit")){return;} // entrer 'exit' pour sortir
+ 
     }
 
 
