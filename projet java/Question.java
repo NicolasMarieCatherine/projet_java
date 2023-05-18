@@ -19,7 +19,7 @@ public class Question {
         for (String reponse : this.liste_reponses) {
             reponses.append(reponse).append(" ");
         }
-        System.out.printf("| %-70s | %-10s | %-30s | %-4d |\n", this.question, this.reponse, reponses, this.point);
+        System.out.printf("| %-70s | %-15s | %-30s | %-10d |\n", this.question, this.reponse, reponses, this.point);
     }
 
     public static void main(String[] args) {
