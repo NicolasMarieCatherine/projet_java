@@ -5,7 +5,7 @@ import java.io.FileReader;
  
 
 public class readFile {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         readFile("profile.txt");
     }
  
@@ -22,5 +22,5 @@ public class readFile {
         } catch (Exception ex){
             System.err.println("Error. "+ex.getMessage());
         }
-    }
+    }*/
 }

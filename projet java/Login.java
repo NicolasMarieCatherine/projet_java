@@ -33,18 +33,6 @@ public class Login {
         this.pwd=pwd;
     }
 
-    public int start(){
-
-		System.out.print("\033c");
-
-		Scanner sc = new Scanner(System.in);
-
-        System.out.print(
-            "\t\tSERIOUS GAME\n\n\tMENU :\n\n1 - Creer un avatar.\n2 - Creer une question.\n3 - Quitter\n\nRéponse : ");
-        int reponse = sc.nextInt();
-
-        return reponse ;
-    }
 
     public void creerAvatar(){
 
@@ -138,10 +126,6 @@ public class Login {
         System.out.println("Vous êtes connecté(e) ! ");
         return true ;
     } 
-    public static void main(String args[]){
-
-        
-    }
 } 
 
 
