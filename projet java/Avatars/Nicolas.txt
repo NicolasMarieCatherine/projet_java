@@ -1,0 +1,5 @@
+
+Nom :Nicolas
+Mdp :mot
+Points de vie :30
+Moyenne :10

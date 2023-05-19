@@ -16,7 +16,7 @@ public class Write {
             lignes.add("\nNom : "+nom);
             lignes.add("\nAge : "+Age); 
             
-            String path="profile/"+nom+".txt";
+            String path="Avatars/"+nom+".txt";
             File file = new File(path);
 
             FileWriter writer = new FileWriter(file,true);

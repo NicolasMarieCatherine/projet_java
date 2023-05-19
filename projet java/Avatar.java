@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.xml.validation.Validator;
+
 import Exeptions.InputException;
 import Exeptions.LoginException;
 import java.io.*;
@@ -20,7 +23,7 @@ public class Avatar {
         boolean fichier_exist = true ;
         try{
 
-            BufferedReader reader = new BufferedReader(new FileReader(new File("profile/"+this.nom+".txt")));
+            BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+this.nom+".txt")));
 
 
         }catch(Exception ignored){ 
@@ -36,7 +39,7 @@ public class Avatar {
         boolean est_vivant = true ;
         try{
 
-            BufferedReader reader = new BufferedReader(new FileReader(new File("profile/"+nom+".txt")));
+            BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+nom+".txt")));
             String ligne;
 
             while((ligne = reader.readLine()) != null){ // si fichier n est  pas vide
@@ -115,13 +118,14 @@ public class Avatar {
         this.moyenne =  nb_point /  nb_note ;
 
         try {
+
             ArrayList<String> lignes = new ArrayList<String>();
             lignes.add("\nNom :"+this.nom);
             lignes.add("\nMdp :"+this.mdp);
             lignes.add("\nPoints de vie :"+this.point_vie);
             lignes.add("\nMoyenne :"+this.moyenne);
             
-            String path="profile/"+this.nom+".txt";
+            String path="Avatars/"+this.nom+".txt";
             File file = new File(path);
 
             FileWriter writer = new FileWriter(file,true);
@@ -148,15 +152,15 @@ public class Avatar {
 
     }
 
-    public boolean Connexion(){
+    public String Connexion(){
 
         boolean validation = false;
         Scanner scan = new Scanner(System.in);
         String nom_user  = "";
         
-        System.out.printf("%n----------------------------------------------------------------\n");
-        System.out.printf("| %-60s |\n", "\t\tConnexion ");
-        System.out.printf("----------------------------------------------------------------\n");
+        System.out.printf("%n------------------------------------------------------------------\n");
+        System.out.printf("| %-50s |\n", "\t\tConnexion ");
+        System.out.printf("------------------------------------------------------------------\n");
 
         while(!validation){
             
@@ -172,7 +176,7 @@ public class Avatar {
 
                 if(Exist(input_nom) == true){ // si cet avatar existe
 
-                    BufferedReader reader = new BufferedReader(new FileReader(new File("profile/"+input_nom+".txt")));
+                    BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+input_nom+".txt")));
 
                     while((ligne = reader.readLine()) != null){ // si fichier n est  pas vide
 
@@ -206,34 +210,26 @@ public class Avatar {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        System.out.println("Binvenue "+nom_user+" !");
-
-        try {
-            // Adding a 3-second delay (3000 milliseconds)
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            // Handle the exception
-            e.printStackTrace();
-        }
-
-        return true ;
+        return nom_user ;
 
     }
 
     public void Liste(){
     
        
-        File chemin_dossier = new File("profile/");
+        File chemin_dossier = new File("Avatars/");
         String liste_fichier[] = chemin_dossier.list();
 
-        System.out.printf("\n\nListe des avatars existants  \n");
-        System.out.println("Nombre de d'avatar  : "+liste_fichier.length+"\n\n");
-        
-        System.out.printf("----------------------------------------------------------------\n");
-        System.out.printf("| %-24s %-35s |\n","Nom","En vie ?");
-        System.out.printf("----------------------------------------------------------------\n");
+        System.out.printf("\n\nListe des avatars existants    \t\t\t\t     nombre : "+liste_fichier.length);
+        System.out.printf("\n\n\n");
 
         
+        System.out.printf(" %-20s %-20s %-20s %-20s \n","Nom","En vie ","Pv","Moyenne");
+        System.out.printf("-----------------------------------------------------------------------\n\n");
+
+        String nom ="";
+        String point="";
+        String moyenne ="";
 
         try {
 
@@ -241,24 +237,191 @@ public class Avatar {
 
                 String fichier[] = liste_fichier[i].split(".txt");
                 boolean est_vivant = Est_vivant(fichier[0]);
-                System.out.printf("| %-24s %-35b |\n",fichier[0],est_vivant);
 
+                BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+fichier[0]+".txt")));
+                String ligne;
+
+                while((ligne = reader.readLine()) != null){
+                    if(ligne.startsWith("Nom :")){
+                        String temp[] = ligne.split(":");
+                        nom=temp[1];
+                    }
+
+                    if(ligne.startsWith("Points de vie :")){
+                        String temp[] = ligne.split(":");
+                        point=temp[1];
+                    }
+
+                    if(ligne.startsWith("Moyenne :")){
+                        String temp[] = ligne.split(":");
+                        moyenne=temp[1];
+                    }
+                }
+
+                //System.out.printf(" %-24s %-35b \n",fichier[0],est_vivant);
+                System.out.printf(" %-20s %-20b %-20s %-20s \n",nom,est_vivant,point,moyenne);
+                
             }
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
-        System.out.printf("----------------------------------------------------------------\n\n");
-        System.out.printf("Quitter --> (exit) ");
+        System.out.printf("\n\n\n\n");
+        System.out.printf("Retour (oui) ? ");
 
 
         Scanner sc = new Scanner(System.in);
         String reponse = sc.nextLine();
-        if ( reponse.equals("exit")){return;} // entrer 'exit' pour sortir
- 
+        if ( reponse.equals("oui")){
+            return;} // entrer 'exit' pour sortir
     }
 
+    public void Admin(){
+
+        
+        try{
+            if (Connexion().equals("Admin") == true){
+
+            }else{
+                throw new InputException("Ce compte n'a pas les droits administrateur ");   
+            }
+        }catch(InputException err){
+            System.out.println(err);
+
+            try {
+                // Adding a 3-second delay (3000 milliseconds)
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                // Handle the exception
+                e.printStackTrace();
+            }
+
+            return ;
+        }
+
+        
+        boolean validation = false;
+        while(!validation){
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Connecté en tant qu'"+this.nom);
+            System.out.println("\n1 - Afficher liste d'avatar \n2 - Modifier un avatar \n3 - Ajouter une question \n4 - Retour\n\nChoix : ");
+        
+            int choix = scanner.nextInt();
+
+            if (choix == 1){ // affichage liste
+
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+
+                Liste();
+
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+            }
+    
+            if (choix == 2){ // Modifier avatar 
+    
+                System.out.println("Modifier un avatar\n");
+                System.out.println("Entrer le nom de l'avatar à modifier ");
+    
+                boolean valid = false ; 
+
+                while(!valid){
+    
+                    try{
+
+                        Scanner sc = new Scanner(System.in);
+                        String reponse = sc.nextLine();
+    
+                        BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+reponse+".txt")));
+                        String ligne;
+    
+                        String nom ="";
+                        String mdp="";
+                        String point="";
+                        String moyenne ="";
+    
+                        System.out.println("Entrer les  nouveaux points de vie ");
+    
+                        String new_point = sc.nextLine();
+                        point = new_point ;
+                    
+                        System.out.println("Entrer la  nouvelle moyenne  ");
+    
+                        String new_moy = sc.nextLine();
+                        moyenne = new_moy ;
+    
+    
+                        while((ligne = reader.readLine()) != null){
+                            if(ligne.startsWith("Nom :")){
+                                String temp[] = ligne.split(":");
+                                nom = temp[1];
+                            }
+    
+                            if(ligne.startsWith("Mdp :")){
+                                String temp[] = ligne.split(":");
+                                mdp = temp[1];
+                            }
+                        }
+    
+                        ArrayList<String> lignes = new ArrayList<String>();
+
+                        lignes.add("\nNom :"+nom);
+                        lignes.add("\nMdp :"+mdp);
+                        lignes.add("\nPoints de vie :"+point);
+                        lignes.add("\nMoyenne :"+moyenne);
+                        
+                        String path="Avatars/"+nom+".txt";
+                        File file = new File(path);
+            
+                        FileWriter writer = new FileWriter(file);
+            
+                        for (int i=0; i<lignes.size();i++)
+                            writer.write(lignes.get(i));
+            
+                        writer.close();
+    
+                        
+                        
+                        
+                        System.out.println("Modification terminée!");
+
+                        try {
+                            // Adding a 3-second delay (3000 milliseconds)
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            // Handle the exception
+                            e.printStackTrace();
+                        }
+
+                        
+
+                        System.out.print("\033[H\033[2J")   ;
+                        System.out.flush();
+
+                        valid = true ;
+
+    
+                    }catch(Exception err){
+    
+                        System.err.println(err);
+                    }
+    
+                }
+
+            }
+            
+        
+            if (choix == 3){} // ajouer question 
+            
+    
+            if (choix == 4){return ;} // Retour
+            
+        }
+        
+    }
 
     public static void main(String args[]) {
     }

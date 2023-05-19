@@ -12,7 +12,7 @@ public class Main {
 			System.out.print("\033c");
 			Scanner sc = new Scanner(System.in);
 			System.out.print(
-				"\t\tSERIOUS GAME\n\n\tMENU \n\n1 - Creer un avatar\n2 - Se connecter\n3 - Afficher la liste des avatars\n4 - Admin \n5 - Quitter\n\nRéponse : ");
+				"\t\tSERIOUS GAME\n\n\tMENU \n\n1 - Creer un avatar\n2 - Se connecter\n3 - Afficher la liste des avatars\n4 - Admin \n5 - Quitter\n\nChoix : ");
 			int reponse = sc.nextInt();
 
             Avatar avatar = new Avatar();
@@ -45,7 +45,7 @@ public class Main {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
 
-                avatar.Connexion();
+                avatar.Admin();
 
             }
             if (reponse == 5){
@@ -83,7 +83,9 @@ public class Main {
  *          3 Afficher liste avatar  - Fait
  *          
  *          4 Admin  - X
- *              |______> 
+ *              |______> afficher liste avatar - Fait 
+ *              |______> modifier avatar  
+ *              |______> ajouter question
  * 
  *          5 Quitter  - Fait
  * 
