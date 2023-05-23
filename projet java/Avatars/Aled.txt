@@ -1,5 +1,0 @@
-
-Nom :Aled
-Mdp :aled
-Points de vie :6
-Moyenne :2.0

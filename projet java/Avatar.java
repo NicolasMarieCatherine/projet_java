@@ -6,6 +6,7 @@ import Exeptions.InputException;
 import Exeptions.LoginException;
 import java.io.*;
 
+
 public class Avatar {
 
     public String nom;
@@ -66,35 +67,32 @@ public class Avatar {
     public void createAvatar(){
 
 
+        System.out.println("\nCréation d'avatar\n");
+
+        System.out.println("Quel est le nom de votre Avatar ?  : \n");
+        
         Scanner sc = new Scanner(System.in);
-
-        System.out.printf("%n----------------------------------------------------------------\n");
-        System.out.printf("| %-60s |\n", "Création d'avatar");
-        System.out.printf("----------------------------------------------------------------\n");
-
-        System.out.println("Quel est le nom de votre Avatar ?  : ");
         this.nom = sc.next();
 
         if(Exist(this.nom) == true){
+
             System.out.println("Un Avatar "+this.nom+" existe déjà ! Veuiller vous connecter");
 
-                try {
-                    // Adding a 3-second delay (3000 milliseconds)
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    // Handle the exception
-                    e.printStackTrace();
-                }
-            return;}
+            try {
+                // Adding a 3-second delay (3000 milliseconds)
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                // Handle the exception
+                e.printStackTrace();
+            }
 
+            return;
+        }
 
-        System.out.println("\n");
-
-        System.out.println("Quel est votre mot de passe ? : ");
+        System.out.println("\nQuel est votre mot de passe ? : ");
         this.mdp = sc.next();
-        System.out.println("\n");
 
-        System.out.println("Combien de notes avez-vous ? : ");
+        System.out.println("\nCombien de notes avez-vous ? : ");
         int nb_note = sc.nextInt();
         System.out.println("\n");
 
@@ -158,9 +156,8 @@ public class Avatar {
         Scanner scan = new Scanner(System.in);
         String nom_user  = "";
         
-        System.out.printf("%n------------------------------------------------------------------\n");
-        System.out.printf("| %-50s |\n", "\t\tConnexion ");
-        System.out.printf("------------------------------------------------------------------\n");
+        System.out.println("\nConnexion \n");
+    
 
         while(!validation){
             
@@ -306,7 +303,7 @@ public class Avatar {
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Connecté en tant qu'"+this.nom);
-            System.out.println("\n1 - Afficher liste d'avatar \n2 - Modifier un avatar \n3 - Ajouter une question \n4 - Retour\n\nChoix : ");
+            System.out.println("\n1 - Afficher liste d'avatar \n2 - Modifier un avatar \n3 - Ajouter une question \n4 - Supprimer un avatar \n5 - Retour\n\nChoix : ");
         
             int choix = scanner.nextInt();
 
@@ -323,47 +320,103 @@ public class Avatar {
     
             if (choix == 2){ // Modifier avatar 
     
+
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+
                 System.out.println("Modifier un avatar\n");
                 System.out.println("Entrer le nom de l'avatar à modifier ");
     
                 boolean valid = false ; 
 
+                String nom ="";
+                String mdp="";
+                String point="";
+                String moyenne ="";
+
+                Scanner sc = new Scanner(System.in);
+                String reponse = sc.nextLine();
+
                 while(!valid){
     
-                    try{
+                    try{ // TODO menu pour choisir option à modifier 
 
-                        Scanner sc = new Scanner(System.in);
-                        String reponse = sc.nextLine();
+
+                        System.out.print("\033[H\033[2J")   ;
+                        System.out.flush();
     
                         BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+reponse+".txt")));
                         String ligne;
-    
-                        String nom ="";
-                        String mdp="";
-                        String point="";
-                        String moyenne ="";
-    
-                        System.out.println("Entrer les  nouveaux points de vie ");
-    
-                        String new_point = sc.nextLine();
-                        point = new_point ;
                     
-                        System.out.println("Entrer la  nouvelle moyenne  ");
-    
-                        String new_moy = sc.nextLine();
-                        moyenne = new_moy ;
-    
-    
-                        while((ligne = reader.readLine()) != null){
+                        
+                        System.out.println("\nEntrez le paramètre à modifier : \n");
+                        
+                        System.out.println("1 - Mot de passe\n");
+                        System.out.println("2 - Points de vie\n");
+                        System.out.println("3 - Moyenne\n\n");
+                        System.out.println("Choix : ");
+
+                        String option = sc.nextLine();
+                        
+
+                        while((ligne = reader.readLine()) != null){ // on récupere les donnée de l'avatar  au cas ou on ne modifie pas tout
+
                             if(ligne.startsWith("Nom :")){
                                 String temp[] = ligne.split(":");
                                 nom = temp[1];
                             }
-    
+
                             if(ligne.startsWith("Mdp :")){
                                 String temp[] = ligne.split(":");
                                 mdp = temp[1];
                             }
+                            
+                            if(ligne.startsWith("Points de vie :")){
+                                String temp[] = ligne.split(":");
+                                point = temp[1];
+                            }
+
+                            if(ligne.startsWith("Moyenne :")){
+                                String temp[] = ligne.split(":");
+                                moyenne = temp[1];
+                            }
+                        }
+
+
+
+                        if(option.equals("1")){ // modifier le mot de passe
+
+                            
+                            System.out.print("\033[H\033[2J")   ;
+                            System.out.flush();
+                            System.out.println("Entrer le nouveau mot de passe \n");
+
+                            
+                            String nouvelle_valeur = sc.nextLine();
+                            mdp = nouvelle_valeur ;
+                
+                        }
+
+                        if(option.equals("2")){ // modifier Points de vie
+
+                            System.out.print("\033[H\033[2J")   ;
+                            System.out.flush();
+                            System.out.println("Entrer les nouveaux points de vie \n");
+
+                            String nouvelle_valeur = sc.nextLine();
+                            point = nouvelle_valeur ;
+                            
+                        }   
+
+                        if(option.equals("3")){ //  modifier la moyenne
+
+                            System.out.print("\033[H\033[2J")   ;
+                            System.out.flush();
+                            System.out.println("Entrer la nouvelle moyenne\n");
+
+                            String nouvelle_valeur = sc.nextLine();
+                            moyenne = nouvelle_valeur ;
+                                
                         }
     
                         ArrayList<String> lignes = new ArrayList<String>();
@@ -383,8 +436,6 @@ public class Avatar {
             
                         writer.close();
     
-                        
-                        
                         
                         System.out.println("Modification terminée!");
 
@@ -416,8 +467,49 @@ public class Avatar {
         
             if (choix == 3){} // ajouer question 
             
+            if (choix == 4){ // suprrimer un avatar
+
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+
+                System.out.println("Supression d'un avatar\n");
+                System.out.println("Entrer le nom de l'avatar à supprimer ");
+                String nom ="";
+                boolean valid = false ; 
+
+                while(!valid){
+
+                    try{
+                        
+                        Scanner sc = new Scanner(System.in);
+                        String reponse = sc.nextLine();
+
+                        File avatar = new File("Avatars/"+reponse+".txt");
+                        nom=reponse;
+
+                        avatar.delete();
+                        valid=true ;
+
+                    }catch(Exception err){
+                        System.err.println(err);
+                    }
+
+                }
+
+                System.out.println("Suppression de l'avatar "+nom+" ...");
+
+                try { // Adding a 3-second delay (3000 milliseconds)
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) { // Handle the exception
+                     e.printStackTrace();
+                }
+
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
     
-            if (choix == 4){return ;} // Retour
+            }   
+
+            if (choix == 5){return ;} // Retour
             
         }
         
