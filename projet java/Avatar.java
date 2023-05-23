@@ -9,6 +9,7 @@ import java.io.*;
 
 public class Avatar {
 
+    
     public String nom;
     public String mdp ;
     public int point_vie;
@@ -19,7 +20,7 @@ public class Avatar {
 
     public boolean Exist(String nom){ // test pour savoir si profile existe
 
-        this.nom = nom ;
+        //this.nom = nom ;
 
         boolean fichier_exist = true ;
         try{

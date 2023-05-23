@@ -85,19 +85,24 @@ public class Main {
  *  *     1 Creer avatar  
  * 
  *  *     2 Se connecter 
- *  *          |______> se connecter
- *  !          |______> lancer defi , qcm etc ...
- *              
- * 
+ *  *          |______> verification
+ *  !          |______> menu
+ *  !               |______> afficher stat de l'avatar 
+ *  !               |______> répondre à une question 
+ *  !               |______> répondre à un défi
+ *  !               |______> répondre à un qcm 
+ *  !               |______> voir notification
+
  *  *      3 Afficher liste avatar  
  *          
  *  *      4 Admin  
- *  *          |______> afficher liste avatar  
- *  *          |______> supprimer avatar 
- *  *          |______> modifier avatar  
- *  !          |______> ajouter question 
- *  *          |______> Retour
+ *  *          |______> menu
+ *  *               |______> afficher liste avatar  
+ *  *               |______> supprimer avatar 
+ *  *               |______> modifier avatar  
+ *  !               |______> ajouter question 
+ *  *               |______> Retour
  * 
  *  *      5 Quitter  
  * 
-*/
+ **/
