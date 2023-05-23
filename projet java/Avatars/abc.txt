@@ -1,0 +1,5 @@
+
+Nom :abc
+Mdp :abc
+Points de vie :6
+Moyenne :2.0

@@ -1,15 +1,10 @@
 import java.util.*;
-
-import javax.xml.validation.Validator;
-
 import Exeptions.InputException;
 import Exeptions.LoginException;
 import java.io.*;
 
-
 public class Avatar {
 
-    
     public String nom;
     public String mdp ;
     public int point_vie;
@@ -20,7 +15,7 @@ public class Avatar {
 
     public boolean Exist(String nom){ // test pour savoir si profile existe
 
-        //this.nom = nom ;
+        this.nom = nom ;
 
         boolean fichier_exist = true ;
         try{
@@ -151,14 +146,14 @@ public class Avatar {
 
     }
 
+
     public String Connexion(){
 
         boolean validation = false;
         Scanner scan = new Scanner(System.in);
         String nom_user  = "";
-        
+
         System.out.println("\nConnexion \n");
-    
 
         while(!validation){
             
@@ -207,11 +202,12 @@ public class Avatar {
 
         System.out.print("\033[H\033[2J");
         System.out.flush();
-
+        
         return nom_user ;
 
     }
 
+    
     public void Liste(){
     
        
@@ -274,6 +270,8 @@ public class Avatar {
         if ( reponse.equals("oui")){
             return;} // entrer 'exit' pour sortir
     }
+    
+
 
     public void Admin(){
 
@@ -486,7 +484,7 @@ public class Avatar {
                         String reponse = sc.nextLine();
 
                         File avatar = new File("Avatars/"+reponse+".txt");
-                        nom=reponse;
+                        nom = reponse;
 
                         avatar.delete();
                         valid=true ;
@@ -513,8 +511,8 @@ public class Avatar {
             if (choix == 5){return ;} // Retour
             
         }
-        
-    }
+    }  
+
 
     public static void main(String args[]) {
     }

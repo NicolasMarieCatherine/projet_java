@@ -1,5 +1,5 @@
 
 Nom :Nicolas
-Mdp :abcd
-Points de vie :80
-Moyenne :5
+Mdp :mot
+Points de vie :10
+Moyenne :11.0

@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+import javax.swing.text.StyledEditorKit;
+
 import Exeptions.InputException;
 import Exeptions.LoginException;
 public class Main {
@@ -32,6 +35,14 @@ public class Main {
                 System.out.flush();
 
                 avatar.Connexion();
+
+                try {
+                    // Adding a 3-second delay (3000 milliseconds)
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    // Handle the exception
+                    e.printStackTrace();
+                }
 
             }
             
@@ -72,13 +83,14 @@ public class Main {
                 System.out.flush();
                 validation=false;
                 
-                } 
+            } 
 
-		    }
-
+		}
     }
-    
+
 }
+    
+
 
 
 /**

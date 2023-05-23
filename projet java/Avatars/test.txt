@@ -1,5 +1,0 @@
-
-Nom :test
-Mdp :test
-Points de vie :20
-Moyenne :10
