@@ -304,7 +304,7 @@ public class Avatar {
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Connecté en tant qu'"+this.nom);
-            System.out.println("\n1 - Afficher liste d'avatar \n2 - Modifier un avatar \n3 - Ajouter une question \n4 - Supprimer un avatar \n5 - Retour\n\nChoix : ");
+            System.out.println("\n1 - Afficher liste d'avatar \n2 - Modifier un avatar \n3 - Ajouter une question \n4 - Supprimer un avatar \n5 - Se déconnecter\n\nChoix : ");
         
             int choix = scanner.nextInt();
 

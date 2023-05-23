@@ -92,6 +92,8 @@ public class Main {
  *  !               |______> répondre à un défi
  *  !               |______> répondre à un qcm 
  *  !               |______> voir notification
+ *  !               |______> déconnexion 
+ *                  
 
  *  *      3 Afficher liste avatar  
  *          
@@ -101,7 +103,7 @@ public class Main {
  *  *               |______> supprimer avatar 
  *  *               |______> modifier avatar  
  *  !               |______> ajouter question 
- *  *               |______> Retour
+ *  *               |______> déconnexion
  * 
  *  *      5 Quitter  
  * 
