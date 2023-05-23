@@ -15,12 +15,13 @@ public class Avatar {
 
     public boolean Exist(String nom){ // test pour savoir si profile existe
 
-        this.nom = nom ;
+        String nom_test = nom ;
+        
 
         boolean fichier_exist = true ;
         try{
 
-            BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+this.nom+".txt")));
+            BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+nom_test+".txt")));
 
 
         }catch(Exception ignored){ 
@@ -119,20 +120,24 @@ public class Avatar {
             lignes.add("\nPoints de vie :"+this.point_vie);
             lignes.add("\nMoyenne :"+this.moyenne);
             
-            String path="Avatars/"+this.nom+".txt";
-            File file = new File(path);
-
-            FileWriter writer = new FileWriter(file,true);
+            File avatar = new File("Avatars/"+this.nom+".txt");
+            FileWriter writer = new FileWriter(avatar,true);
 
             for (int i=0; i<lignes.size();i++)
                 writer.write(lignes.get(i));
 
             writer.close();
+
+            File notification = new File("Notifications/"+this.nom+".txt");
+            FileWriter writer1 = new FileWriter(notification,true);
+            writer1.write("");
+            writer1.close();
+
+
         }catch(IOException err){
             System.err.println(err);
         }
         
-
 
         System.out.println("Votre compte à bien était créé ! ");
         
@@ -151,7 +156,7 @@ public class Avatar {
 
         boolean validation = false;
         Scanner scan = new Scanner(System.in);
-        String nom_user  = "";
+        
 
         System.out.println("\nConnexion \n");
 
@@ -179,7 +184,7 @@ public class Avatar {
                             if( (temp[1].equals(input_nom)) == false ){
                                 throw new LoginException("Nom ou mot de passe invalide ! . Recommencer \n");
                             }
-                           nom_user = temp[1];
+                           this.nom = temp[1];
                         }
     
                         if(ligne.startsWith("Mdp :")){
@@ -188,7 +193,18 @@ public class Avatar {
                             if( (temp[1].equals(input_pwd)) == false){
                                 throw new LoginException("Nom ou mot de passe invalide ! . Recommencer \n");
                             }
-                        }                        
+                            this.mdp = temp[1];
+                        }
+                        
+                        if(ligne.startsWith("Points de vie :")){
+                            String temp[] = ligne.split(":");
+                            this.point_vie = Integer.parseInt(temp[1]);
+                        }  
+
+                        if(ligne.startsWith("Moyenne :")){
+                            String temp[] = ligne.split(":");
+                            this.moyenne = Double.parseDouble(temp[1]);
+                        }
                     } 
                 }
                 
@@ -203,7 +219,7 @@ public class Avatar {
         System.out.print("\033[H\033[2J");
         System.out.flush();
         
-        return nom_user ;
+        return this.nom ;
 
     }
 
@@ -275,9 +291,10 @@ public class Avatar {
 
     public void Admin(){
 
+        Connexion();
         
         try{
-            if (Connexion().equals("Admin") == true){
+            if (this.nom.equals("Admin") == true){
 
             }else{
                 throw new InputException("Ce compte n'a pas les droits administrateur ");   
@@ -301,9 +318,14 @@ public class Avatar {
         while(!validation){
 
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Connecté en tant qu'"+this.nom);
-            System.out.println("\n1 - Afficher liste d'avatar \n2 - Modifier un avatar \n3 - Ajouter une question \n4 - Supprimer un avatar \n5 - Se déconnecter\n\nChoix : ");
-        
+            System.out.println("Connecté en tant qu'"+this.nom+"\n\n");
+            System.out.println("1 - Afficher liste d'avatar");
+            System.out.println("2 - Modifier un avatarr");
+            System.out.println("3 - Ajouter une question");
+            System.out.println("4 - Supprimer un avatar");
+            System.out.println("5 - Se déconnecter\n\n");
+            System.out.println("Choix");
+    
             int choix = scanner.nextInt();
 
             if (choix == 1){ // affichage liste
@@ -338,7 +360,7 @@ public class Avatar {
 
                 while(!valid){
     
-                    try{ // TODO menu pour choisir option à modifier 
+                    try{
 
 
                         System.out.print("\033[H\033[2J")   ;
@@ -476,12 +498,14 @@ public class Avatar {
                 String nom ="";
                 boolean valid = false ; 
 
-                while(!valid){
+                while(!valid){ // test si avatar existe , si oui on le supprime
 
                     try{
                         
                         Scanner sc = new Scanner(System.in);
                         String reponse = sc.nextLine();
+                        nom = reponse;
+
 
                         File avatar = new File("Avatars/"+reponse+".txt");
                         nom = reponse;
@@ -508,11 +532,63 @@ public class Avatar {
     
             }   
 
-            if (choix == 5){return ;} // Retour
+            if (choix == 5){validation = true;} // Retour
             
         }
     }  
 
+    public void Menu(){
+
+        Connexion() ;
+
+        System.out.print("\033[H\033[2J")   ;
+        System.out.flush();
+
+        System.out.println("Connecter en tant que "+this.nom+"\n\n");   
+
+        boolean validation = false ;
+        while(!validation){
+
+            
+            System.out.println("1 - Afficher les statistiques ");
+            System.out.println("2 - Répondre à une question");
+            System.out.println("3 - Répondre à un défi");
+            System.out.println("4 - Répondre à un qcm");
+            System.out.println("5 - Voir les notifications");
+            System.out.println("6 - Déconnexion\n\n");
+            System.out.println("Choix : ");
+
+
+            Scanner sc = new Scanner(System.in);
+            int reponse = sc.nextInt();
+
+            if(reponse == 1){ // statistique
+
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+
+                System.out.println("Statistique de "+this.nom);
+                System.out.println(this.point_vie);
+                System.out.println(this.moyenne);
+            }
+
+            if(reponse == 2){} // répondre question
+
+            if(reponse == 3){} // répondre défi
+
+            if(reponse == 4){}// repondre qcm
+
+            if(reponse == 5){// notifications
+
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+                
+            }
+
+            if(reponse == 6){validation = true ;} // déconnexion
+
+        }
+    }
 
     public static void main(String args[]) {
     }

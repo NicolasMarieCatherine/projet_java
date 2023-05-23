@@ -34,15 +34,7 @@ public class Main {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
 
-                avatar.Connexion();
-
-                try {
-                    // Adding a 3-second delay (3000 milliseconds)
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    // Handle the exception
-                    e.printStackTrace();
-                }
+                avatar.Menu();
 
             }
             
@@ -98,15 +90,14 @@ public class Main {
  * 
  *  *     2 Se connecter 
  *  *          |______> verification
- *  !          |______> menu
- *  !               |______> afficher stat de l'avatar 
+ *  *          |______> menu
+ *  *               |______> afficher stat de l'avatar 
  *  !               |______> répondre à une question 
  *  !               |______> répondre à un défi
  *  !               |______> répondre à un qcm 
  *  !               |______> voir notification
- *  !               |______> déconnexion 
+ *  *               |______> déconnexion 
  *                  
-
  *  *      3 Afficher liste avatar  
  *          
  *  *      4 Admin  
