@@ -508,9 +508,11 @@ public class Avatar {
 
 
                         File avatar = new File("Avatars/"+reponse+".txt");
-                        nom = reponse;
-
                         avatar.delete();
+
+                        File notification = new File("Notifications/"+reponse+".txt");
+                        notification.delete();
+                        
                         valid=true ;
 
                     }catch(Exception err){
