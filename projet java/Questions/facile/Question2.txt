@@ -1,0 +1,6 @@
+
+Question_2 :xxxxxxxxxxxxxxx
+bonne_reponse :4
+mauvaise_reponse_1 :5
+mauvaise_reponse_2 :3
+mauvaise_reponse_3 :1
