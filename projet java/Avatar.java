@@ -7,7 +7,7 @@ public class Avatar {
 
     public String nom;
     public String mdp ;
-    public int point_vie;
+    public int point_vie = 100;
     public double moyenne ;
     public String[] liste_question;
 
@@ -284,7 +284,7 @@ public class Avatar {
         Scanner sc = new Scanner(System.in);
         String reponse = sc.nextLine();
         if ( reponse.equals("oui")){
-            return;} // entrer 'exit' pour sortir
+            return;} // entrer 'oui' pour sortir
     }
     
 
@@ -486,7 +486,11 @@ public class Avatar {
             }
             
         
-            if (choix == 3){} // ajouer question 
+            if (choix == 3){  //ajouer question 
+
+                Question question = new Question();
+                question.Ajouter_Question();
+            } 
             
             if (choix == 4){ // suprrimer un avatar
 
