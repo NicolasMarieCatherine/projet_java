@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import Exeptions.InputException;
 
 public class Question {
 
@@ -35,6 +36,7 @@ public class Question {
 
             try {
 
+
                 Scanner sc = new Scanner(System.in);
 
                 System.out.println("Entrer la dificultée  facile / dure / moyenne : ");
@@ -49,17 +51,21 @@ public class Question {
                 String bonne_reponse =sc.nextLine();
                 
                 System.out.println("\n");
-                System.out.println("Entrer une mauvaise reponse : ");
+                System.out.println("Entrer une premier mauvaise reponse : ");
                 String mauvais_reponse_1 =sc.nextLine();
 
                 System.out.println("\n");
-                System.out.println("Entrer une mauvaise reponse : ");
+                System.out.println("Entrer une seconde mauvaise reponse : ");
                 String mauvais_reponse_2 =sc.nextLine();
 
                 System.out.println("\n");
-                System.out.println("Entrer une mauvaise reponse : ");
+                System.out.println("Entrer une troisieme mauvaise reponse : ");
                 String mauvais_reponse_3 =sc.nextLine();
 
+
+                if (dificulte == "" || question == "" || bonne_reponse == "" || mauvais_reponse_1 == "" || mauvais_reponse_2 == "" || mauvais_reponse_3 == "" ){
+                    throw new InputException("Une ou plusieurs données entrées sont vide . Recommencer ");
+                }
 
                 File chemin_dossier = new File("Questions/"+dificulte);
                 String liste_fichier[] = chemin_dossier.list();

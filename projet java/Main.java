@@ -105,7 +105,7 @@ public class Main {
  *  *               |______> afficher liste avatar  
  *  *               |______> supprimer avatar 
  *  *               |______> modifier avatar  
- *  !               |______> ajouter question 
+ *  *               |______> ajouter question 
  *  *               |______> déconnexion
  * 
  *  *      5 Quitter  

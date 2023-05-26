@@ -1,6 +1,6 @@
 
-Question_1 :xxxxxxxxxxxxxxx
-bonne_reponse :4
-mauvaise_reponse_1 :5
-mauvaise_reponse_2 :3
-mauvaise_reponse_3 :1
+Question_1 :Quelle est le rayon d'un cercle de diametre 12 ?
+bonne_reponse :6
+mauvaise_reponse_1 :3
+mauvaise_reponse_2 :24
+mauvaise_reponse_3 :18

@@ -1,6 +1,6 @@
 
-Question_1 :xxxxxxxxxxxxxxx
-bonne_reponse :4
-mauvaise_reponse_1 :5
-mauvaise_reponse_2 :3
-mauvaise_reponse_3 :1
+Question_1 :Combien fait 10^6 ?
+bonne_reponse :1000000
+mauvaise_reponse_1 :10000
+mauvaise_reponse_2 :10000000
+mauvaise_reponse_3 :100000
