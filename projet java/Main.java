@@ -93,7 +93,8 @@ public class Main {
  *  *     2 Se connecter 
  *  *          |______> verification
  *  *               |______> menu
- *  *                       |______> afficher stat de l'avatar 
+ *  *                       |______> afficher stat de l'avatar
+ *  *                       |______> afficher  les questions du jeu  
  *  !                       |______> répondre à une question 
  *  !                       |______> répondre à un défi
  *  !                       |______> répondre à un qcm 
