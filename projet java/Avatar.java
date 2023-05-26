@@ -547,6 +547,8 @@ public class Avatar {
 
         Connexion() ;
 
+        Question question = new Question();
+
         System.out.print("\033[H\033[2J")   ;
         System.out.flush();
 
@@ -557,11 +559,12 @@ public class Avatar {
 
             
             System.out.println("1 - Afficher les statistiques ");
-            System.out.println("2 - Répondre à une question");
-            System.out.println("3 - Répondre à un défi");
-            System.out.println("4 - Répondre à un qcm");
-            System.out.println("5 - Voir les notifications");
-            System.out.println("6 - Déconnexion\n\n");
+            System.out.println("2 - Afficher les questions ");
+            System.out.println("3 - Répondre à une question");
+            System.out.println("4 - Répondre à un défi");
+            System.out.println("5 - Répondre à un qcm");
+            System.out.println("6 - Voir les notifications");
+            System.out.println("7 - Déconnexion\n\n");
             System.out.println("Choix : ");
 
 
@@ -578,20 +581,30 @@ public class Avatar {
                 System.out.println(this.moyenne);
             }
 
-            if(reponse == 2){} // répondre question
 
-            if(reponse == 3){} // répondre défi
+            if(reponse == 2){
+                
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+                
+                question.Liste_question();
 
-            if(reponse == 4){}// repondre qcm
+            } // répondre question
 
-            if(reponse == 5){// notifications
+            if(reponse == 3){} // répondre question
+
+            if(reponse == 4){} // répondre défi
+
+            if(reponse == 5){}// repondre qcm
+
+            if(reponse == 6){// notifications
 
                 System.out.print("\033[H\033[2J")   ;
                 System.out.flush();
                 
             }
 
-            if(reponse == 6){validation = true ;} // déconnexion
+            if(reponse == 7){validation = true ;} // déconnexion
 
         }
     }

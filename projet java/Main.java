@@ -12,6 +12,8 @@ public class Main {
 		boolean validation = true ;
 		while (validation){
 
+            
+            
 			System.out.print("\033c");
 			Scanner sc = new Scanner(System.in);
 			System.out.print(

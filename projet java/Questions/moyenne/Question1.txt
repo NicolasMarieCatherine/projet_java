@@ -1,5 +1,5 @@
 
-Question_1 :Combien fait  2^2 + 2^4 ?
+Question :Combien fait  2^2 + 2^4 ?
 bonne_reponse :20
 mauvaise_reponse_1 :16
 mauvaise_reponse_2 :18
