@@ -8,12 +8,12 @@ public class Avatar {
     public String nom;
     public String mdp ;
     public int point_vie = 100;
-    public double moyenne ;
+    public int moyenne ;
     public String[] liste_question;
 
     public Avatar(){}
 
-    public void Ecrire(String nom , String mdp ,int point_vie , double moyenne){
+    public void Ecrire(String nom , String mdp ,int point_vie , int moyenne){
 
 
         /* 
@@ -70,7 +70,7 @@ public class Avatar {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) { 
-                e.printStackTrace();
+            e.printStackTrace();
         }
 
         System.out.print("\033[H\033[2J")   ;
@@ -275,7 +275,7 @@ public class Avatar {
 
                         if(ligne.startsWith("Moyenne :")){
                             String temp[] = ligne.split(":");
-                            this.moyenne = Double.parseDouble(temp[1]);
+                            this.moyenne = Integer.parseInt(temp[1]);
                         }
                     } 
                 }
@@ -443,7 +443,7 @@ public class Avatar {
                 String nom ="";
                 String mdp="";
                 int point=0;
-                double moyenne =0;
+                int moyenne =0;
 
                 Scanner sc = new Scanner(System.in);
                 String reponse = sc.nextLine();
@@ -487,7 +487,7 @@ public class Avatar {
 
                             if(ligne.startsWith("Moyenne :")){
                                 String temp[] = ligne.split(":");
-                                moyenne = Double.parseDouble(temp[1]);
+                                moyenne = Integer.parseInt(temp[1]);
                             }
                         }
 
@@ -522,7 +522,7 @@ public class Avatar {
                             System.out.println("Entrer la nouvelle moyenne\n");
 
                             String nouvelle_valeur = sc.nextLine();
-                            moyenne = Double.parseDouble(nouvelle_valeur) ;
+                            moyenne = Integer.parseInt(nouvelle_valeur) ;
                                 
                         }
                         
@@ -623,7 +623,7 @@ public class Avatar {
         boolean validation = false ;
         while(!validation){
 
-            System.out.println("Connecter en tant que "+this.nom+"\n\n");   
+            System.out.println("Connecté en tant que "+this.nom+"\n\n");   
             
             System.out.println("1 - Afficher les statistiques ");
             System.out.println("2 - Afficher les questions ");
@@ -676,12 +676,12 @@ public class Avatar {
                 System.out.print("\033[H\033[2J")   ;
                 System.out.flush();
 
-                int point = question.Repondre_question((int)this.moyenne);
+                int point = question.Repondre_question(this.moyenne);
+                this.point_vie = this.point_vie + point ;
 
                 if ( point > 0 ){
 
                     System.out.println("Bonne réponse ! "+point+" seront ajoutés à votre avatar");
-                    this.point_vie = this.point_vie + point ;
 
                     Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
 
@@ -698,7 +698,6 @@ public class Avatar {
                 }else{
 
                     System.out.println("Mauvaise réponse ! "+point+" seront retirés à votre avatar");
-                    this.point_vie = this.point_vie + point ;
 
                     Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
 
@@ -717,7 +716,51 @@ public class Avatar {
 
             if(reponse == 4){} // répondre défi
 
-            if(reponse == 5){}// repondre qcm
+            if(reponse == 5){ // repondre qcm
+
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+
+                int point = question.Repondre_QCM(this.moyenne);
+                this.point_vie = this.point_vie + point ;
+
+                if (point > 0) {
+
+                    System.out.println("\n\nVous remportez "+point+" points !");
+
+                    Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
+
+                    
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    
+                    System.out.print("\033[H\033[2J")   ;
+                    System.out.flush();
+
+                }
+                else{
+
+                    System.out.println("\n\nVous perdez "+point+" points !");
+
+
+                    Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
+
+                    
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    
+                    System.out.print("\033[H\033[2J")   ;
+                    System.out.flush();
+
+                }
+                
+            }
 
             if(reponse == 6){// notifications
 

@@ -13,27 +13,21 @@ public class Question {
     public ArrayList<String> liste_reponses=new ArrayList<String>();
     public int point;
 
-    
-    public Question(String new_question, String new_reponse, ArrayList<String> new_liste_reponse, int new_point) {
-        this.question = new_question;
-        this.reponse = new_reponse;
-        this.liste_reponses = new_liste_reponse;
-        this.point = new_point;
-    }
-    
-
     public Question(){}
-
-    public void printQuestion() {
-        StringBuilder reponses = new StringBuilder();
-        for (String reponse : this.liste_reponses) {
-            reponses.append(reponse).append(" ");
-        }
-        System.out.printf("| %-70s | %-15s | %-30s | %-10d |\n", this.question, this.reponse, reponses, this.point);
-    }
 
     public int Repondre_question(int moyenne){
 
+        /*
+         *
+         *      Permet à un avatar de répondre à une question tirées aléatoirement 
+         *      La dificulté de la question dépend de la moyenne de l'avatar (celle-ci est placée en paramètre)
+         *      Cette difficulté permet de savoir dans quel dossier prendre la question     Ex : "Questions/facile/"
+         *      Elle permet aussi de définir le nombre de points que l'avatar va perdre ou gagner on fonction de sa réponse à la question
+         *      
+         *      return int -> point de vie à enlever o rajouter à l'avatar
+         *  
+         * 
+        */
         
         if (moyenne <= 10 ){ this.difficulte = "facile" ; this.point = 10;}
         if (10 < moyenne  && moyenne < 14 ){ this.difficulte="moyenne";  this.point = 15;}
@@ -49,7 +43,8 @@ public class Question {
             BufferedReader reader = new BufferedReader(new FileReader(new File(chemin_dossier+"/Question"+ random.nextInt(1,max) +".txt")));
             String ligne;
 
-    
+            this.liste_reponses.clear();
+
             while((ligne = reader.readLine()) != null){
 
                 if(ligne.startsWith("bonne_reponse :")){
@@ -97,7 +92,38 @@ public class Question {
 
     }   
 
-    public void Repondre_QCM(int moyenne){}
+    public int Repondre_QCM(int moyenne){
+
+        int total =  0  ;
+        int taille = 3;
+        ArrayList<String> historique = new ArrayList<String>();
+        int nb_bonne_reponse = 0;
+
+        for (int i = 1 ; i < taille+1 ; i++){
+
+            System.out.print("\033[H\033[2J")   ;
+            System.out.flush();
+            
+            System.out.println("\nQcm \t\t\t Question n°"+i+" sur "+taille);
+            System.out.println("\n\n");
+            int point = Repondre_question(moyenne);
+
+            if (point > 0){
+                historique.add("vrai");
+                nb_bonne_reponse ++;
+            }
+            else{historique.add("faux");}
+
+            total += point ;
+        } 
+
+        System.out.println("Qcm terminé ! ");
+        System.out.println("Vous avez "+nb_bonne_reponse+" bonne(s) réponse(s) sur "+taille);
+
+        
+
+        return total ;
+    }
 
     public void Liste_question(){
 
@@ -110,7 +136,6 @@ public class Question {
         String liste_fichier_dure[] = chemin_dossier_dure.list();
 
         int total = liste_fichier_facile.length + liste_fichier_moyenne.length + liste_fichier_dure.length;
-        //ArrayList<String> liste_question = new ArrayList<String>();
 
         System.out.printf("\n\nListe des questions existantes    \t\t\t\t        nombre : "+total);
         System.out.printf("\n\n\n");
@@ -257,10 +282,8 @@ public class Question {
                 System.out.println("\n\nLa question a bien était ajoutée ! ");
 
                 try {
-                    // Adding a 3-second delay (3000 milliseconds)
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
-                    // Handle the exception
                     e.printStackTrace();
                 }
 
@@ -279,14 +302,22 @@ public class Question {
     public static void main(String[] args) {
 
         /* 
-        Question question = new Question("3+3", "6", new ArrayList<>(Arrays.asList("3", "6", "9")), 10);
-        question.printQuestion();
-        
-
-        Question question = new Question();
-        //question.Liste_question();
-        //question.Repondre_question(12);
+         * 
+         *     Test Question    
+         * 
+         * 
+         * 
+         *      Question question = new Question();
+         *      question.Repondre_QCM(12);
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
         */
+
     }
     
 }

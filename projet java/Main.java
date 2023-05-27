@@ -92,34 +92,33 @@ public class Main {
  *  *     2 Se connecter 
  *  *          |______> verification
  *  *               |______> menu
- *  *                      |______> afficher stat de l'avatar
- *  *                       |______> afficher  les questions du jeu  
- *  *                       |______> répondre à une question 
- *  !                       |______> répondre à un défi
- *  !                       |______> répondre à un qcm 
- *  !                       |______> voir notification
- *  *                       |______> déconnexion 
- *                  
- *  *      3 Afficher liste avatar  
+ *  *                      |______> afficher stat de l'avatar                    - Fait
+ *  *                       |______> afficher  les questions du jeu              - Fait  
+ *  *                       |______> répondre à une question                     - Fait
+ *  !                       |______> répondre à un défi                          - X
+ *  *                       |______> répondre à un qcm                           - Fait
+ *  !                       |______> voir notification                           - X
+ *  *                       |______> déconnexion                                 - Fait
+ *                          
+ *  *      3 Afficher liste avatar                                               - Fait
  *          
- *  *      4 Admin  
- *  *          |______> menu
- *  *               |______> afficher liste avatar  
- *  *               |______> supprimer avatar 
- *  *               |______> modifier avatar  
- *  *               |______> ajouter question 
- *  *               |______> déconnexion
+ *  *      4 Admin                                                               - Fait
+ *  *          |______> menu                                                     - Fait
+ *  *               |______> afficher liste avatar                               - Fait
+ *  *               |______> supprimer avatar                                    - Fait
+ *  *               |______> modifier avatar                                     - Fait
+ *  *               |______> ajouter question                                    - Fait
+ *  *               |______> déconnexion                                         - Fait
  *  *
- *  *      5 Quitter  
+ *  *      5 Quitter                                                             - Fait
  *  *
  *  *
  *  *
  *  *       
- *  *       Ajouter un delay
- *  *
+ *  *       Ajouter un delay (ms)
  *  *
  *  *       try {    
- *  *           Thread.sleep(1500);
+ *  *           Thread.sleep(2000);
  *  *       } catch (InterruptedException e) {
  *  *           e.printStackTrace();
  *  *       }
