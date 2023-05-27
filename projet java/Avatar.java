@@ -3,27 +3,43 @@ import Exeptions.InputException;
 import Exeptions.LoginException;
 import java.io.*;
 
+/**
+ * @author FloFA1998 NicolasMarieCatherine
+ * 
+ *  Initialisation de la classe Avatar /
+ *  nom : Nom de l'avatar    /
+ *  mdp : Mot de passe de l'avatar /
+ *  poit_de_vie : Point de vie  de l'avatar /          
+ *  moyenne : Moyenne de l'avatar /
+*/
 public class Avatar {
 
     public String nom;
     public String mdp ;
     public int point_vie = 100;
     public int moyenne ;
-    public String[] liste_question;
 
+
+    /**
+     * 
+     * Creation d'un avatar vide
+     * 
+    */
     public Avatar(){}
 
-    public void Ecrire(String nom , String mdp ,int point_vie , int moyenne){
 
-
-        /* 
-        *    Ecrit nom ,mdp , pv , moyenne dans le fichier de l'avatar qui appelle cette fonction
-        *    return void
-        */       
+    /** 
+     *  Ecrit les informations dans le fichier de l'avatar qui appelle cette fonction
+     *  @param nom nom de l'avatar
+     *  @param mdp mot de passe de l'avatar
+     *  @param point_de_vie point de vie de l'avatar
+     *  @param moyenne moyenne de l'avatar
+     * 
+    */ 
+    public void Ecrire(String nom , String mdp ,int point_de_vie , int moyenne){
 
         ArrayList<String> lignes = new ArrayList<String>();
 
-                
         lignes.add("\nNom :"+nom);
         lignes.add("\nMdp :"+mdp);
         lignes.add("\nPoints de vie :"+point_vie);
@@ -45,14 +61,13 @@ public class Avatar {
         
     }
 
-    
+    /** 
+     *   Supprime un avatar à partir de son nom
+     *   @param nom nom de l'avatar
+    */
     public void Supprimer(String nom){ 
 
-        /* 
-        *   Supprime un avatar à partir de son nom
-        *   return void
         
-        */
         try{
 
             File avatar = new File("Avatars/"+nom+".txt");
@@ -78,14 +93,14 @@ public class Avatar {
 
     }
 
-    
+    /** 
+     *  Permet de  savoir si un avatar avec le nom en paramètre existe
+     *  @param nom nom de l'avatar
+     *  @return Renvoie true si un avatar avec ce nom existe
+    */
     public boolean Exist(String nom){ 
 
-        /* 
-        *    Permet de  savoir si un avatar avec le nom en parametre existe
-        *    return boolean
-        */
-
+        
         String nom_test = nom ;
         
 
@@ -103,13 +118,13 @@ public class Avatar {
         return fichier_exist ;
     }
 
-   
-    public boolean Est_vivant(String nom){
 
-        /* 
-        *   Permet de  savoir si un avatar a plus 0 point de vie
-        *   return boolean
-        */
+   /** 
+     *   Permet de savoir si un avatar a plus 0 point de vie
+     *   @param nom nom de l'avatar
+     *   @return renvoie true si l'avatar a plus de 0 point de vie
+    */
+    public boolean Est_vivant(String nom){
 
         boolean est_vivant = true ;
         try{
@@ -138,16 +153,12 @@ public class Avatar {
     }
 
 
-    
+    /** 
+     *   Cree un fichier avec le nom de l'avatar dans "Avatars/" et un fichier notification dans "Notifications/"
+    */
     public void createAvatar(){
 
-
-        /* 
-        *   Crée un fichier avec le nom de l'avatar dans "Avatars/" et un fichier notification dans "Notifications/"
-        *   return void
-        */
-
-        System.out.println("\nCréation d'avatar\n");
+        System.out.println("\nCreation d'avatar\n");
 
         System.out.println("Quel est le nom de votre Avatar ?  : \n");
         
@@ -156,7 +167,7 @@ public class Avatar {
 
         if(Exist(this.nom) == true){
 
-            System.out.println("Un Avatar "+this.nom+" existe déjà ! Veuiller vous connecter");
+            System.out.println("Un Avatar "+this.nom+" existe dejà ! Veuiller vous connecter");
 
             try {
                 Thread.sleep(2000);
@@ -184,7 +195,7 @@ public class Avatar {
                 nb_point += sc.nextInt();
 
             }catch(Exception err){
-               System.out.println("La note entrée n'est pas valide ! Recommencer ...");
+               System.out.println("La note entree n'est pas valide ! Recommencer ...");
             }
             
         }
@@ -207,8 +218,7 @@ public class Avatar {
             System.err.println(err);
         }
         
-
-        System.out.println("Votre compte à bien était créé ! ");
+        System.out.println("Votre compte à bien etait cree ! ");
         
         try {
             Thread.sleep(2000);
@@ -218,14 +228,13 @@ public class Avatar {
 
     }
 
-    
+    /**
+     *   Vérifie si le nom et mot de passe entrés par l'utilisateur correspondent aux données dans le fichier de l'avatar
+     *   @return Renvoie le nom de l'avatar si connexion authorisée
+    */
     public String Connexion(){
 
-        /*
-        *   Vérifie si le nom et mot de passe entrés par l'utilisateur correspondent aux données dans le fichier de l'avatar
-        *   return le nom de l'avatar si connexion authorisée
-        */
-
+        
         boolean validation = false;
         Scanner scan = new Scanner(System.in);
         
@@ -296,13 +305,11 @@ public class Avatar {
     }
 
 
-    
+    /**
+        *   Affiche la liste des avatars et leurs statistiques à partir des fichier dans "Avatars/"
+    */
     public void Liste(){
 
-        /*
-        *   Affiche la liste des avatars et leurs statistiques à partir des fichier dans "Avatars/"
-        *   return void
-        */
        
         File chemin_dossier = new File("Avatars/");
         String liste_fichier[] = chemin_dossier.list();
@@ -364,23 +371,18 @@ public class Avatar {
     }
     
 
-    
+    /**  
+     *   Utilisation de la methode Connexion() pour savoir si le compte connecté est celui de l'administrateur
+     *   Apres verification on peut effectuer plusieurs actions comme :
+     *
+     *   Afficher la liste des avatars /
+     *   Modifier un avatar      - > choisir quelle donnee à modifier /
+     *   Ajouter une question    - > Question.Ajouter_Question() /
+     *   Supprimer un avatar     - > Supprimer(nom) / 
+     *   Se déconnecter
+     *
+    */
     public void Admin(){
-
-
-        /*  
-        *   Utilisation de la méthode Connexion() pour savoir si le compte connecté est celui Admin
-        *   Apres vérification on put effecteur plusieurs action comme :
-        *
-        *   Afficher la liste des avatars
-        *   Modifier un avatar      - > choisir quelle donnée à modfiée 
-        *   Ajouter une question    - > Question.Ajouter_Question()
-        *   Supprimer un avatar     - > Supprimer(nom)
-        *   Se déconnecter
-        *
-        *   return void
-        */
-
 
         Connexion();
         
@@ -408,12 +410,12 @@ public class Avatar {
         while(!validation){
 
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Connecté en tant qu'"+this.nom+"\n\n");
+            System.out.println("Connecte en tant qu'"+this.nom+"\n\n");
             System.out.println("1 - Afficher liste d'avatar");
             System.out.println("2 - Modifier un avatarr");
             System.out.println("3 - Ajouter une question");
             System.out.println("4 - Supprimer un avatar");
-            System.out.println("5 - Se déconnecter\n\n");
+            System.out.println("5 - Se deconnecter\n\n");
             System.out.println("Choix");
     
             int choix = scanner.nextInt();
@@ -459,7 +461,7 @@ public class Avatar {
                         String ligne;
                     
                         
-                        System.out.println("\nEntrez le paramètre à modifier : \n");
+                        System.out.println("\nEntrez le parametre à modifier : \n");
                         
                         System.out.println("1 - Mot de passe\n");
                         System.out.println("2 - Points de vie\n");
@@ -468,7 +470,7 @@ public class Avatar {
 
                         String option = sc.nextLine();
                         
-                        while((ligne = reader.readLine()) != null){ // on récupere les donnée de l'avatar  au cas ou on ne modifie pas tout
+                        while((ligne = reader.readLine()) != null){ // on recupere les donnee de l'avatar  au cas ou on ne modifie pas tout
 
                             if(ligne.startsWith("Nom :")){
                                 String temp[] = ligne.split(":");
@@ -528,7 +530,7 @@ public class Avatar {
                         
                         Ecrire(nom, mdp, point, moyenne);
  
-                        System.out.println("Modification terminée!");
+                        System.out.println("Modification terminee!");
 
                         try {
                             Thread.sleep(2000);
@@ -593,24 +595,24 @@ public class Avatar {
         }
     }  
 
+
+    /** 
+     *   Utilisation de la methode Connexion() pour se connecter a un avatar autre que Admin
+     *   Si verification authorisée 
+     *   
+     *   Plusieurs options disponibles :
+     *   Afficher les statistiques de l 'avatar connecté /    
+     *   Afficher les questions disponibles pour les question , qcm ... /
+     *   Repondre à une question     - > Question.Repondre_Question() /
+     *   Repondre à une defi         - > Question.Repondre_Defi() /
+     *   Repondre à un Qcm           - > Question.Repondre_QCM() /
+     *   Voir les notifications de l'avatar connecté /
+     *   Se déconnecter  /
+     *   
+    */
     public void Menu(){
 
-        /* 
-        *   Utilisation de la méthode Connexion() pour se connecter a un avatar autre que Admin
-        *   Si vérification authorisée 
-        *   
-        *   Plusieurs options disponibles :
-        *   Afficher les statistiques de l 'avatar connecté     
-        *   Afficher les questions disponibles pour les question , qcm ...
-        *   Répondre à une question     - > Question.Repondre_Question()
-        *   Répondre à une défi         - > Question.Repondre_Defi()
-        *   Répondre à un Qcm           - > Question.Repondre_QCM()
-        *   Voir les notifications de l'avatar connecté
-        *   Se déconnecter 
-        *   
-        *   return void
-        */
-
+    
         Connexion() ;
 
         Question question = new Question();
@@ -623,15 +625,15 @@ public class Avatar {
         boolean validation = false ;
         while(!validation){
 
-            System.out.println("Connecté en tant que "+this.nom+"\n\n");   
+            System.out.println("Connecte en tant que "+this.nom+"\n\n");   
             
             System.out.println("1 - Afficher les statistiques ");
             System.out.println("2 - Afficher les questions ");
-            System.out.println("3 - Répondre à une question");
-            System.out.println("4 - Répondre à un défi");
-            System.out.println("5 - Répondre à un qcm");
+            System.out.println("3 - Repondre à une question");
+            System.out.println("4 - Repondre à un defi");
+            System.out.println("5 - Repondre à un qcm");
             System.out.println("6 - Voir les notifications");
-            System.out.println("7 - Déconnexion\n\n");
+            System.out.println("7 - Deconnexion\n\n");
             System.out.println("Choix : ");
 
 
@@ -670,7 +672,7 @@ public class Avatar {
                 System.out.flush();
             } 
 
-            if(reponse == 3){ // répondre question
+            if(reponse == 3){ // repondre question
 
                     
                 System.out.print("\033[H\033[2J")   ;
@@ -681,7 +683,7 @@ public class Avatar {
 
                 if ( point > 0 ){
 
-                    System.out.println("Bonne réponse ! "+point+" seront ajoutés à votre avatar");
+                    System.out.println("Bonne reponse ! "+point+" seront ajoutes à votre avatar");
 
                     Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
 
@@ -697,7 +699,7 @@ public class Avatar {
 
                 }else{
 
-                    System.out.println("Mauvaise réponse ! "+point+" seront retirés à votre avatar");
+                    System.out.println("Mauvaise reponse ! "+point+" seront retires à votre avatar");
 
                     Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
 
@@ -714,7 +716,7 @@ public class Avatar {
 
             } 
 
-            if(reponse == 4){} // répondre défi
+            if(reponse == 4){} // repondre defi
 
             if(reponse == 5){ // repondre qcm
 
@@ -769,7 +771,7 @@ public class Avatar {
                 
             }
 
-            if(reponse == 7){validation = true ;} // déconnexion
+            if(reponse == 7){validation = true ;} // deconnexion
 
         }
     }

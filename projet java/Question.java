@@ -5,6 +5,14 @@ import javax.swing.text.StyledEditorKit;
 import java.io.*;
 import Exeptions.InputException;
 
+/**
+ * Initialisation de la classe Question
+ *  question : la question à laquelle répondre /
+ *  reponse  : la réponse de la question /
+ *  difficulté  :  la difficulté de la question /
+ *  liste_reponse : une liste de mauvaise réponse ( pour qcm ) /
+ *  point  :  point de vie à enlever ou rajouter 
+*/
 public class Question {
 
     public String question;
@@ -13,21 +21,27 @@ public class Question {
     public ArrayList<String> liste_reponses=new ArrayList<String>();
     public int point;
 
+    /**
+     * 
+     * Initialisation d'un objet Question vide
+     */
     public Question(){}
 
+
+    /**
+     *
+     *      Permet à un avatar de répondre à une question tirées aléatoirement 
+     *      @param moyenne Moyenne de l'avatar qui répond à la question 
+     *      Cette difficulté permet de savoir dans quel dossier prendre la question     Ex : "Questions/facile/"
+     *      Elle permet aussi de définir le nombre de points que l'avatar va perdre ou gagner on fonction de sa réponse à la question
+     *      
+     *      @return Renvoie les points de vie à enlever ou rajouter à l'avatar
+     *  
+     * 
+    */
     public int Repondre_question(int moyenne){
 
-        /*
-         *
-         *      Permet à un avatar de répondre à une question tirées aléatoirement 
-         *      La dificulté de la question dépend de la moyenne de l'avatar (celle-ci est placée en paramètre)
-         *      Cette difficulté permet de savoir dans quel dossier prendre la question     Ex : "Questions/facile/"
-         *      Elle permet aussi de définir le nombre de points que l'avatar va perdre ou gagner on fonction de sa réponse à la question
-         *      
-         *      return int -> point de vie à enlever o rajouter à l'avatar
-         *  
-         * 
-        */
+        
         
         if (moyenne <= 10 ){ this.difficulte = "facile" ; this.point = 10;}
         if (10 < moyenne  && moyenne < 14 ){ this.difficulte="moyenne";  this.point = 15;}
@@ -92,6 +106,13 @@ public class Question {
 
     }   
 
+    /**
+     * 
+     * Exécute la fonction Repondre_Question() 3 fois car  ' int taille =  3' 
+     *
+     * @param moyenne Moyenne de l'avatar qui répond au QCM 
+     * @return Renvoie les points de vie à enlever ou rajouter à l'avatar
+    */
     public int Repondre_QCM(int moyenne){
 
         int total =  0  ;
@@ -125,6 +146,11 @@ public class Question {
         return total ;
     }
 
+
+    /**
+     * 
+     * Affiche la liste des question disponibles dans le jeu  càd  dans le dossier "facile" "dure" "moyenne" contenus dans "Questions/"
+    */
     public void Liste_question(){
 
         File chemin_dossier_facile = new File("Questions/facile/");
@@ -227,7 +253,12 @@ public class Question {
     }
     
 
-
+    /**
+     * 
+     * Demande à l'avatar d'écrire sa question , difficulté , bonne_reponse , mauvaises reponses .
+     * Ajoute cette question dans le dossier correspondant à la difficulté entrée par l'avatar
+     * 
+    */
     public void Ajouter_Question(){
 
 
@@ -301,7 +332,7 @@ public class Question {
     
     public static void main(String[] args) {
 
-        /* 
+        /** 
          * 
          *     Test Question    
          * 

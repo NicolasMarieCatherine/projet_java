@@ -84,8 +84,6 @@ public class Main {
 }
     
 
-
-
 /**
  *  *     1 Creer avatar  
  * 
