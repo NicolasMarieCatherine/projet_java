@@ -1,0 +1,5 @@
+
+Question :Combien fait (racinne carrée de 25) + 5 ?
+bonne_reponse :10
+mauvaise_reponse1 :15
+mauvaise_reponse2 :20

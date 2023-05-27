@@ -13,7 +13,78 @@ public class Avatar {
 
     public Avatar(){}
 
-    public boolean Exist(String nom){ // test pour savoir si profile existe
+    public void Ecrire(String nom , String mdp ,int point_vie , double moyenne){
+
+
+        /* 
+        *    Ecrit nom ,mdp , pv , moyenne dans le fichier de l'avatar qui appelle cette fonction
+        *    return void
+        */       
+
+        ArrayList<String> lignes = new ArrayList<String>();
+
+                
+        lignes.add("\nNom :"+nom);
+        lignes.add("\nMdp :"+mdp);
+        lignes.add("\nPoints de vie :"+point_vie);
+        lignes.add("\nMoyenne :"+moyenne);
+
+        try{
+            String path="Avatars/"+nom+".txt";
+            File file = new File(path);
+    
+            FileWriter writer = new FileWriter(file);
+    
+            for (int i=0; i<lignes.size();i++)
+                writer.write(lignes.get(i));
+    
+            writer.close();
+        }catch(Exception err){
+            System.err.println(err);
+        }
+        
+    }
+
+    
+    public void Supprimer(String nom){ 
+
+        /* 
+        *   Supprime un avatar à partir de son nom
+        *   return void
+        
+        */
+        try{
+
+            File avatar = new File("Avatars/"+nom+".txt");
+            avatar.delete();
+
+            File notification = new File("Notifications/"+nom+".txt");
+            notification.delete();
+
+        }catch(Exception err){
+            System.err.println(err);
+        }
+
+        System.out.println("Suppression de l'avatar "+nom+" ...");
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) { 
+                e.printStackTrace();
+        }
+
+        System.out.print("\033[H\033[2J")   ;
+        System.out.flush();
+
+    }
+
+    
+    public boolean Exist(String nom){ 
+
+        /* 
+        *    Permet de  savoir si un avatar avec le nom en parametre existe
+        *    return boolean
+        */
 
         String nom_test = nom ;
         
@@ -32,7 +103,13 @@ public class Avatar {
         return fichier_exist ;
     }
 
+   
     public boolean Est_vivant(String nom){
+
+        /* 
+        *   Permet de  savoir si un avatar a plus 0 point de vie
+        *   return boolean
+        */
 
         boolean est_vivant = true ;
         try{
@@ -57,12 +134,18 @@ public class Avatar {
         
         ;}
         
-        
         return est_vivant ;
     }
 
+
+    
     public void createAvatar(){
 
+
+        /* 
+        *   Crée un fichier avec le nom de l'avatar dans "Avatars/" et un fichier notification dans "Notifications/"
+        *   return void
+        */
 
         System.out.println("\nCréation d'avatar\n");
 
@@ -76,10 +159,8 @@ public class Avatar {
             System.out.println("Un Avatar "+this.nom+" existe déjà ! Veuiller vous connecter");
 
             try {
-                // Adding a 3-second delay (3000 milliseconds)
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                // Handle the exception
                 e.printStackTrace();
             }
 
@@ -94,7 +175,6 @@ public class Avatar {
         System.out.println("\n");
 
         
-
         int nb_point = 0;
         for (int i = 1; i <= nb_note; i++) {
             System.out.println("Note " + i + " = ");
@@ -109,29 +189,18 @@ public class Avatar {
             
         }
 
-        this.point_vie = nb_point;
+        this.point_vie = this.point_vie + nb_point;
         this.moyenne =  nb_point /  nb_note ;
 
+        
         try {
 
-            ArrayList<String> lignes = new ArrayList<String>();
-            lignes.add("\nNom :"+this.nom);
-            lignes.add("\nMdp :"+this.mdp);
-            lignes.add("\nPoints de vie :"+this.point_vie);
-            lignes.add("\nMoyenne :"+this.moyenne);
-            
-            File avatar = new File("Avatars/"+this.nom+".txt");
-            FileWriter writer = new FileWriter(avatar,true);
-
-            for (int i=0; i<lignes.size();i++)
-                writer.write(lignes.get(i));
-
-            writer.close();
+            Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne); // on crée notre avatar et on crée un fichier notification 
 
             File notification = new File("Notifications/"+this.nom+".txt");
-            FileWriter writer1 = new FileWriter(notification,true);
-            writer1.write("");
-            writer1.close();
+            FileWriter writer = new FileWriter(notification,true);
+            writer.write("");
+            writer.close();
 
 
         }catch(IOException err){
@@ -142,17 +211,20 @@ public class Avatar {
         System.out.println("Votre compte à bien était créé ! ");
         
         try {
-            // Adding a 3-second delay (3000 milliseconds)
             Thread.sleep(2000);
         } catch (InterruptedException e) {
-            // Handle the exception
             e.printStackTrace();
         }
 
     }
 
-
+    
     public String Connexion(){
+
+        /*
+        *   Vérifie si le nom et mot de passe entrés par l'utilisateur correspondent aux données dans le fichier de l'avatar
+        *   return le nom de l'avatar si connexion authorisée
+        */
 
         boolean validation = false;
         Scanner scan = new Scanner(System.in);
@@ -223,9 +295,14 @@ public class Avatar {
 
     }
 
+
     
     public void Liste(){
-    
+
+        /*
+        *   Affiche la liste des avatars et leurs statistiques à partir des fichier dans "Avatars/"
+        *   return void
+        */
        
         File chemin_dossier = new File("Avatars/");
         String liste_fichier[] = chemin_dossier.list();
@@ -268,7 +345,6 @@ public class Avatar {
                     }
                 }
 
-                //System.out.printf(" %-24s %-35b \n",fichier[0],est_vivant);
                 System.out.printf(" %-20s %-20b %-20s %-20s \n",nom,est_vivant,point,moyenne);
                 
             }
@@ -288,8 +364,23 @@ public class Avatar {
     }
     
 
-
+    
     public void Admin(){
+
+
+        /*  
+        *   Utilisation de la méthode Connexion() pour savoir si le compte connecté est celui Admin
+        *   Apres vérification on put effecteur plusieurs action comme :
+        *
+        *   Afficher la liste des avatars
+        *   Modifier un avatar      - > choisir quelle donnée à modfiée 
+        *   Ajouter une question    - > Question.Ajouter_Question()
+        *   Supprimer un avatar     - > Supprimer(nom)
+        *   Se déconnecter
+        *
+        *   return void
+        */
+
 
         Connexion();
         
@@ -303,10 +394,9 @@ public class Avatar {
             System.out.println(err);
 
             try {
-                // Adding a 3-second delay (3000 milliseconds)
+
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                // Handle the exception
                 e.printStackTrace();
             }
 
@@ -352,8 +442,8 @@ public class Avatar {
 
                 String nom ="";
                 String mdp="";
-                String point="";
-                String moyenne ="";
+                int point=0;
+                double moyenne =0;
 
                 Scanner sc = new Scanner(System.in);
                 String reponse = sc.nextLine();
@@ -361,8 +451,7 @@ public class Avatar {
                 while(!valid){
     
                     try{
-
-
+                        
                         System.out.print("\033[H\033[2J")   ;
                         System.out.flush();
     
@@ -379,7 +468,6 @@ public class Avatar {
 
                         String option = sc.nextLine();
                         
-
                         while((ligne = reader.readLine()) != null){ // on récupere les donnée de l'avatar  au cas ou on ne modifie pas tout
 
                             if(ligne.startsWith("Nom :")){
@@ -394,16 +482,14 @@ public class Avatar {
                             
                             if(ligne.startsWith("Points de vie :")){
                                 String temp[] = ligne.split(":");
-                                point = temp[1];
+                                point = Integer.parseInt(temp[1]);
                             }
 
                             if(ligne.startsWith("Moyenne :")){
                                 String temp[] = ligne.split(":");
-                                moyenne = temp[1];
+                                moyenne = Double.parseDouble(temp[1]);
                             }
                         }
-
-
 
                         if(option.equals("1")){ // modifier le mot de passe
 
@@ -425,7 +511,7 @@ public class Avatar {
                             System.out.println("Entrer les nouveaux points de vie \n");
 
                             String nouvelle_valeur = sc.nextLine();
-                            point = nouvelle_valeur ;
+                            point = Integer.parseInt(nouvelle_valeur) ;
                             
                         }   
 
@@ -436,39 +522,20 @@ public class Avatar {
                             System.out.println("Entrer la nouvelle moyenne\n");
 
                             String nouvelle_valeur = sc.nextLine();
-                            moyenne = nouvelle_valeur ;
+                            moyenne = Double.parseDouble(nouvelle_valeur) ;
                                 
                         }
-    
-                        ArrayList<String> lignes = new ArrayList<String>();
-
-                        lignes.add("\nNom :"+nom);
-                        lignes.add("\nMdp :"+mdp);
-                        lignes.add("\nPoints de vie :"+point);
-                        lignes.add("\nMoyenne :"+moyenne);
                         
-                        String path="Avatars/"+nom+".txt";
-                        File file = new File(path);
-            
-                        FileWriter writer = new FileWriter(file);
-            
-                        for (int i=0; i<lignes.size();i++)
-                            writer.write(lignes.get(i));
-            
-                        writer.close();
-    
-                        
+                        Ecrire(nom, mdp, point, moyenne);
+ 
                         System.out.println("Modification terminée!");
 
                         try {
-                            // Adding a 3-second delay (3000 milliseconds)
                             Thread.sleep(2000);
                         } catch (InterruptedException e) {
-                            // Handle the exception
+
                             e.printStackTrace();
                         }
-
-                        
 
                         System.out.print("\033[H\033[2J")   ;
                         System.out.flush();
@@ -491,6 +558,7 @@ public class Avatar {
                 Question question = new Question();
                 question.Ajouter_Question();
             } 
+
             
             if (choix == 4){ // suprrimer un avatar
 
@@ -499,7 +567,7 @@ public class Avatar {
 
                 System.out.println("Supression d'un avatar\n");
                 System.out.println("Entrer le nom de l'avatar à supprimer ");
-                String nom ="";
+
                 boolean valid = false ; 
 
                 while(!valid){ // test si avatar existe , si oui on le supprime
@@ -507,16 +575,9 @@ public class Avatar {
                     try{
                         
                         Scanner sc = new Scanner(System.in);
-                        String reponse = sc.nextLine();
-                        nom = reponse;
+                        String nom = sc.nextLine();
 
-
-                        File avatar = new File("Avatars/"+reponse+".txt");
-                        avatar.delete();
-
-                        File notification = new File("Notifications/"+reponse+".txt");
-                        notification.delete();
-                        
+                        Supprimer(nom);
                         valid=true ;
 
                     }catch(Exception err){
@@ -525,17 +586,6 @@ public class Avatar {
 
                 }
 
-                System.out.println("Suppression de l'avatar "+nom+" ...");
-
-                try { // Adding a 3-second delay (3000 milliseconds)
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) { // Handle the exception
-                     e.printStackTrace();
-                }
-
-                System.out.print("\033[H\033[2J")   ;
-                System.out.flush();
-    
             }   
 
             if (choix == 5){validation = true;} // Retour
@@ -545,6 +595,22 @@ public class Avatar {
 
     public void Menu(){
 
+        /* 
+        *   Utilisation de la méthode Connexion() pour se connecter a un avatar autre que Admin
+        *   Si vérification authorisée 
+        *   
+        *   Plusieurs options disponibles :
+        *   Afficher les statistiques de l 'avatar connecté     
+        *   Afficher les questions disponibles pour les question , qcm ...
+        *   Répondre à une question     - > Question.Repondre_Question()
+        *   Répondre à une défi         - > Question.Repondre_Defi()
+        *   Répondre à un Qcm           - > Question.Repondre_QCM()
+        *   Voir les notifications de l'avatar connecté
+        *   Se déconnecter 
+        *   
+        *   return void
+        */
+
         Connexion() ;
 
         Question question = new Question();
@@ -552,11 +618,12 @@ public class Avatar {
         System.out.print("\033[H\033[2J")   ;
         System.out.flush();
 
-        System.out.println("Connecter en tant que "+this.nom+"\n\n");   
+        
 
         boolean validation = false ;
         while(!validation){
 
+            System.out.println("Connecter en tant que "+this.nom+"\n\n");   
             
             System.out.println("1 - Afficher les statistiques ");
             System.out.println("2 - Afficher les questions ");
@@ -575,23 +642,78 @@ public class Avatar {
 
                 System.out.print("\033[H\033[2J")   ;
                 System.out.flush();
+                System.out.println("Statistique de "+this.nom+"\n\n");
 
-                System.out.println("Statistique de "+this.nom);
-                System.out.println(this.point_vie);
-                System.out.println(this.moyenne);
+
+                System.out.printf("%-20s %-20s \n","Point de vie","Moyenne");
+                System.out.printf("%-20s %-20s",this.point_vie,this.moyenne);
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
             }
 
 
-            if(reponse == 2){
+            if(reponse == 2){ // afficher liste des questions
                 
                 System.out.print("\033[H\033[2J")   ;
                 System.out.flush();
                 
                 question.Liste_question();
 
-            } // répondre question
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+            } 
 
-            if(reponse == 3){} // répondre question
+            if(reponse == 3){ // répondre question
+
+                    
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+
+                int point = question.Repondre_question((int)this.moyenne);
+
+                if ( point > 0 ){
+
+                    System.out.println("Bonne réponse ! "+point+" seront ajoutés à votre avatar");
+                    this.point_vie = this.point_vie + point ;
+
+                    Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
+
+                    
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    
+                    System.out.print("\033[H\033[2J")   ;
+                    System.out.flush();
+
+                }else{
+
+                    System.out.println("Mauvaise réponse ! "+point+" seront retirés à votre avatar");
+                    this.point_vie = this.point_vie + point ;
+
+                    Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
+
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.print("\033[H\033[2J")   ;
+                    System.out.flush();
+                    
+                }
+
+            } 
 
             if(reponse == 4){} // répondre défi
 

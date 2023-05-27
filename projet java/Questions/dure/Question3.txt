@@ -1,0 +1,5 @@
+
+Question :Combien fait  2^2 + 2^4 ?
+bonne_reponse :20
+mauvaise_reponse1 :16
+mauvaise_reponse2 :18

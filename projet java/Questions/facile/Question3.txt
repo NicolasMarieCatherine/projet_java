@@ -1,0 +1,5 @@
+
+Question :Combien fait  2^0 ?
+bonne_reponse :1
+mauvaise_reponse1 :0
+mauvaise_reponse2 :2

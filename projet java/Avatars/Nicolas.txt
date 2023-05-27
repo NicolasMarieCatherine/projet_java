@@ -1,5 +1,5 @@
 
 Nom :nicolas
 Mdp :nicolas
-Points de vie :102
-Moyenne :2.0
+Points de vie :100
+Moyenne :16.0

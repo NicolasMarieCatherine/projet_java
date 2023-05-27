@@ -1,0 +1,5 @@
+
+Question :Combien fait 10 / 0.1 ?
+bonne_reponse :100
+mauvaise_reponse1 :1
+mauvaise_reponse2 :0.1

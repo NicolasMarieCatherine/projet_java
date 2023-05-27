@@ -1,6 +1,5 @@
 
-Question :Combien fait  2^2 + 2^4 ?
-bonne_reponse :20
-mauvaise_reponse_1 :16
-mauvaise_reponse_2 :18
-mauvaise_reponse_3 :19
+Question :Combien fait  1h30 + 1h30 ?
+bonne_reponse :3h
+mauvaise_reponse1 :2h40
+mauvaise_reponse2 :3h20

@@ -66,10 +66,9 @@ public class Main {
 
                 
                 try {
-                    // Adding a 3-second delay (3000 milliseconds)
+
                     Thread.sleep(1500);
                 } catch (InterruptedException e) {
-                    // Handle the exception
                     e.printStackTrace();
                 }
                 
@@ -93,9 +92,9 @@ public class Main {
  *  *     2 Se connecter 
  *  *          |______> verification
  *  *               |______> menu
- *  *                       |______> afficher stat de l'avatar
+ *  *                      |______> afficher stat de l'avatar
  *  *                       |______> afficher  les questions du jeu  
- *  !                       |______> répondre à une question 
+ *  *                       |______> répondre à une question 
  *  !                       |______> répondre à un défi
  *  !                       |______> répondre à un qcm 
  *  !                       |______> voir notification
@@ -110,7 +109,31 @@ public class Main {
  *  *               |______> modifier avatar  
  *  *               |______> ajouter question 
  *  *               |______> déconnexion
- * 
+ *  *
  *  *      5 Quitter  
+ *  *
+ *  *
+ *  *
+ *  *       
+ *  *       Ajouter un delay
+ *  *
+ *  *
+ *  *       try {    
+ *  *           Thread.sleep(1500);
+ *  *       } catch (InterruptedException e) {
+ *  *           e.printStackTrace();
+ *  *       }
+ *  * 
+ *  *
+ *  *       
+ *  *                   
+ *  *       Nettoyer la console
+ *  *   
+ *  *       System.out.print("\033[H\033[2J")   ;
+ *  *       System.out.flush();
+ *  *
+ *  *
+ *  *
+ *  *
  * 
  **/

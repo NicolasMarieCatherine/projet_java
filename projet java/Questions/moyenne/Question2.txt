@@ -1,0 +1,5 @@
+
+Question :Quel est le pourcentage de dioxygene dans l'air ?
+bonne_reponse :20
+mauvaise_reponse1 :78
+mauvaise_reponse2 :2
