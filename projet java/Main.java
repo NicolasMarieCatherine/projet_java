@@ -95,7 +95,7 @@ public class Main {
  *  *                       |______> répondre à une question                     - Fait
  *  !                       |______> répondre à un défi                          - X
  *  *                       |______> répondre à un qcm                           - Fait
- *  !                       |______> voir notification                           - X
+ *  *                       |______> voir notification                           - Fait
  *  *                       |______> déconnexion                                 - Fait
  *                          
  *  *      3 Afficher liste avatar                                               - Fait

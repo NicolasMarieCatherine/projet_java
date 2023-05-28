@@ -1,0 +1,13 @@
+
+From :flo
+Type :qcm
+Fait :oui
+
+From :flo
+Type :question
+Fait :oui
+
+From :flo
+Type :question
+Fait :non
+
