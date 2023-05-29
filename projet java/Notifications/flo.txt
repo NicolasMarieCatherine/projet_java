@@ -1,12 +1,12 @@
 
 From :nicolas
-Type :question
-Fait :non
-
-From :nicolas
 Type :qcm
 Fait :oui
 
 From :nicolas
-Type :qcm
+Type :question
+Fait :non
+
+From :nicolas
+Type :question
 Fait :non

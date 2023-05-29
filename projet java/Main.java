@@ -57,7 +57,7 @@ public class Main {
                 avatar.Admin();
 
             }
-
+            
             if (reponse == 5){// Quitter
 
                 System.out.print("\033[H\033[2J")   ;
@@ -86,7 +86,7 @@ public class Main {
 
 /**
  *  *     1 Creer avatar  
- * 
+ *  *
  *  *     2 Se connecter 
  *  *          |______> verification
  *  *               |______> menu
@@ -97,9 +97,9 @@ public class Main {
  *  *                       |______> répondre à un qcm                           - Fait
  *  *                       |______> voir notification                           - Fait
  *  *                       |______> déconnexion                                 - Fait
- *                          
+ *  *                        
  *  *      3 Afficher liste avatar                                               - Fait
- *          
+ *  *       
  *  *      4 Admin                                                               - Fait
  *  *          |______> menu                                                     - Fait
  *  *               |______> afficher liste avatar                               - Fait
@@ -132,5 +132,5 @@ public class Main {
  *  *
  *  *
  *  *
- * 
+ *  *
  **/

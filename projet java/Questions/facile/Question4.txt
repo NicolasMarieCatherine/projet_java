@@ -1,0 +1,5 @@
+
+Question :Combien fait 1+2 ?
+bonne_reponse :3
+mauvaise_reponse1 :4
+mauvaise_reponse2 :2

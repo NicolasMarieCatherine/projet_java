@@ -35,23 +35,23 @@ public class Avatar {
 
     /** 
      *  Ecrit les informations dans le fichier de l'avatar qui appelle cette fonction
-     *  @param nom nom de l'avatar
-     *  @param mdp mot de passe de l'avatar
-     *  @param point_de_vie point de vie de l'avatar
-     *  @param moyenne moyenne de l'avatar
+     *  @param new_nom nom de l'avatar
+     *  @param new_mdp mot de passe de l'avatar
+     *  @param new_point_de_vie point de vie de l'avatar
+     *  @param new_moyenne moyenne de l'avatar
      * 
     */ 
-    public void Ecrire(String nom , String mdp ,int point_de_vie , int moyenne){
+    public void Ecrire(String new_nom , String new_mdp ,int new_point_de_vie , int new_moyenne){
 
-        ArrayList<String> lignes = new ArrayList<String>();
+        ArrayList<String> lignes = new ArrayList<String>(); // liste des lignes à écrire dans le fichier de l'avatar
 
-        lignes.add("\nNom :"+nom);
-        lignes.add("\nMdp :"+mdp);
-        lignes.add("\nPoints de vie :"+point_vie);
-        lignes.add("\nMoyenne :"+moyenne);
+        lignes.add("\nNom :"+new_nom);  
+        lignes.add("\nMdp :"+new_mdp);
+        lignes.add("\nPoints de vie :"+new_point_de_vie);
+        lignes.add("\nMoyenne :"+new_moyenne);
 
         try{
-            String path="Avatars/"+nom+".txt";
+            String path="Avatars/"+new_nom+".txt"; 
             File file = new File(path);
     
             FileWriter writer = new FileWriter(file);
@@ -70,15 +70,15 @@ public class Avatar {
      *   Supprime un avatar à partir de son nom
      *   @param nom nom de l'avatar
     */
-    public void Supprimer(String nom){ 
+    public void Supprimer(String nom){  // on supprime le fichier de l'avatar et son fichier notification
 
         
         try{
 
-            File avatar = new File("Avatars/"+nom+".txt");
+            File avatar = new File("Avatars/"+nom+".txt");      // fichier à supprimer 
             avatar.delete();
 
-            File notification = new File("Notifications/"+nom+".txt");
+            File notification = new File("Notifications/"+nom+".txt"); // fichier à supprimer  
             notification.delete();
 
         }catch(Exception err){
@@ -142,17 +142,16 @@ public class Avatar {
                 if(ligne.startsWith("Points de vie :")){ // rechercher du nom
                     String temp[] = ligne.split(":");
 
-                    double point = Double.parseDouble(temp[1]);
+                    double point = Double.parseDouble(temp[1]); // test si les points de vie > 0
                     if (point <= 0){
                         est_vivant = false ;
                     }
                 }
             }
             
-        }catch(Exception ignored){ 
-            est_vivant = false 
-        
-        ;}
+        }catch(Exception ignored){  // si avatar n existe pas 
+            est_vivant = false ;
+        }
         
         return est_vivant ;
     }
@@ -170,7 +169,7 @@ public class Avatar {
         Scanner sc = new Scanner(System.in);
         this.nom = sc.next();
 
-        if(Exist(this.nom) == true){
+        if(Exist(this.nom) == true){ // test si avatar avec le meme non existe déjà 
 
             System.out.println("Un Avatar "+this.nom+" existe dejà ! Veuiller vous connecter");
 
@@ -267,7 +266,7 @@ public class Avatar {
                         if(ligne.startsWith("Nom :")){ // rechercher du nom
                             String temp[] = ligne.split(":");
                             
-                            if( (temp[1].equals(input_nom)) == false ){
+                            if( (temp[1].equals(input_nom)) == false ){// test si nom entré correspond à celui dans le fichier
                                 throw new LoginException("Nom ou mot de passe invalide ! . Recommencer \n");
                             }
                            this.nom = temp[1];
@@ -276,13 +275,13 @@ public class Avatar {
                         if(ligne.startsWith("Mdp :")){
                             String temp[] = ligne.split(":");
                             
-                            if( (temp[1].equals(input_pwd)) == false){
+                            if( (temp[1].equals(input_pwd)) == false){ // test si mot de passe entré correspond à celui dans le fichier
                                 throw new LoginException("Nom ou mot de passe invalide ! . Recommencer \n");
                             }
                             this.mdp = temp[1];
                         }
                         
-                        if(ligne.startsWith("Points de vie :")){
+                        if(ligne.startsWith("Points de vie :")){ 
                             String temp[] = ligne.split(":");
                             this.point_vie = Integer.parseInt(temp[1]);
                         }  
@@ -292,6 +291,8 @@ public class Avatar {
                             this.moyenne = Integer.parseInt(temp[1]);
                         }
                     } 
+                    // on récupere les informations de l'avatar qui se connecte dans this.nom , this.mdp , this.point_vie , this.moyenne
+                    // pour " simuler" une connexion . Grâce à ça on pourrat afficher ses statistiques et plus sans devoir relire son fichier
                 }
                 
                 validation = true ;
@@ -319,7 +320,7 @@ public class Avatar {
         File chemin_dossier = new File("Avatars/");
         String liste_fichier[] = chemin_dossier.list();
 
-        System.out.printf("\n\nListe des avatars existants    \t\t\t\t     nombre : "+liste_fichier.length);
+        System.out.printf("\n\nListe des avatars existants    \t\t\t\t     nombre : "+liste_fichier.length); // on récupere la taille du dossier "Avatars" qui est égale au nombre d avatars présents
         System.out.printf("\n\n\n");
 
         
@@ -330,7 +331,7 @@ public class Avatar {
         String point="";
         String moyenne ="";
 
-        try {
+        try { // on récupere les noms , moyennes , points de vie des avatars existants 
 
             for(int i=0; i<liste_fichier.length; i++) {
 
@@ -371,8 +372,8 @@ public class Avatar {
 
         Scanner sc = new Scanner(System.in);
         String reponse = sc.nextLine();
-        if ( reponse.equals("oui")){
-            return;} // entrer 'oui' pour sortir
+        if ( reponse.equals("oui")){    // on entre 'oui' pour sortir
+            return;} 
     }
     
 
@@ -392,7 +393,7 @@ public class Avatar {
         Connexion();
         
         try{
-            if (this.nom.equals("Admin") == true){
+            if (this.nom.equals("Admin") == true){ // test si l'avatar connecté a le nom "Admin"
 
             }else{
                 throw new InputException("Ce compte n'a pas les droits administrateur ");   
@@ -412,7 +413,7 @@ public class Avatar {
 
         
         boolean validation = false;
-        while(!validation){
+        while(!validation){ // affichage menu
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Connecte en tant qu'"+this.nom+"\n\n");
@@ -533,7 +534,7 @@ public class Avatar {
                                 
                         }
                         
-                        Ecrire(nom, mdp, point, moyenne);
+                        Ecrire(nom, mdp, point, moyenne); // on écrit les nouvelles données 
  
                         System.out.println("Modification terminee!");
 
@@ -562,6 +563,9 @@ public class Avatar {
         
             if (choix == 3){  //ajouer question 
 
+                System.out.print("\033[H\033[2J")   ;
+                System.out.flush();
+
                 Question question = new Question();
                 question.Ajouter_Question();
             } 
@@ -582,9 +586,9 @@ public class Avatar {
                     try{
                         
                         Scanner sc = new Scanner(System.in);
-                        String nom = sc.nextLine();
+                        String reponse = sc.nextLine();
 
-                        Supprimer(nom);
+                        Supprimer(reponse);
                         valid=true ;
 
                     }catch(Exception err){
@@ -629,7 +633,7 @@ public class Avatar {
         
 
         boolean validation = false ;
-        while(!validation){
+        while(!validation){ // affichage menu 
 
             System.out.println("Connecte en tant que "+this.nom+"\n\n");   
             
@@ -647,7 +651,7 @@ public class Avatar {
             Scanner sc = new Scanner(System.in);
             int reponse = sc.nextInt();
 
-            if(reponse == 1){ // statistique
+            if(reponse == 1){ // affichage des statistiques
 
                 System.out.print("\033[H\033[2J")   ;
                 System.out.flush();
@@ -728,16 +732,16 @@ public class Avatar {
                 System.out.print("\033[H\033[2J")   ;
                 System.out.flush();
 
-                int count_a_faire=0;
+                int count_a_faire=0; // nombre de défis où "Fait " == non
                 String from ="";
                 String type = "";
                 String fait ="";
                 
-                validation = false ;
+                boolean valid = false ;
 
-                ArrayList<String> contenu_notif = new ArrayList<String>();
+                ArrayList<String> contenu_notif = new ArrayList<String>(); // liste des notifications contenues dans le fichier notification de l'avatar
                 
-                while (!validation){    
+                while(!valid){    
 
                     try{
                         
@@ -774,10 +778,27 @@ public class Avatar {
                         System.err.println(err);
                     }
 
+                    if(count_a_faire == 0){ // si tout les défi sont "faits"
+
+                        System.out.print("\033[H\033[2J")   ;
+                        System.out.flush();
+                        
+                        System.out.println("Vous n'avez aucune notifications ");
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+    
+                        valid = true ;
+                        System.out.print("\033[H\033[2J")   ;
+                        System.out.flush();
+
+                    }
 
                     System.out.println("\n");
 
-                    ArrayList<String> liste_defi_a_faire = new ArrayList<String>();
+                    ArrayList<String> liste_defi_a_faire = new ArrayList<String>(); // liste des défis qui ne sont pas fait
 
                     
                     for (int i = 2 ; i < contenu_notif.size() ; i +=3){ // on met les données du défi dans une autre liste si il n'a pas était fait
@@ -788,77 +809,90 @@ public class Avatar {
                             liste_defi_a_faire.add(contenu_notif.get(i-1)); // indice du type  *******
                             liste_defi_a_faire.add(contenu_notif.get(i)); // indice de l'etat  "non" *******
 
+                            /*
+                             * On ajoute le nom
+                             * le type 
+                             * l'etat  à notre nouvelle liste
+                            */
+
                             contenu_notif.remove(i);    //on enleve le "non"
                             contenu_notif.remove(i-1);  //on enleve le type
                             contenu_notif.remove(i-2);  //on enleve le nom
-                                                            
+                            
+                            /*
+                             * on les enleve de l'ancienne liste 
+                            */
                         }
                     }
-                    
-                    
                     
                     
                     System.out.println("Répondre à un défi");
                     System.out.println("Vous avez "+count_a_faire+" défi(s) à faire\n\n");
                         
-                    System.out.println("A combien de défi voulez vous répondre");
                     
-                    
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-                    Scanner scan = new Scanner(System.in);
-                    int nb_defi_a_faire = 0;
+                    System.out.print("\033[H\033[2J")   ;
+                    System.out.flush();
 
-                    int input = scan.nextInt();
+                    int i = 1; // index du type du défi  ->   
+                    /*  
+                        Ex :
+                           From :" "Type :" "Fait"
+                         ["nicolas","qcm","non" ,"nicolas","qcm","non"]
+                             0       1     2        3       4     5
+                    */
 
-                    nb_defi_a_faire = input; 
-                
-                    System.out.println(nb_defi_a_faire);
+                    for(int count = 0 ; count < count_a_faire ; count ++){ // tant qu'il y a des défis à faire
 
-                    int i = 1;
+                        if(liste_defi_a_faire.get(i).equals("qcm") == true){ // si le type == qcm
 
-                    
-
-                    for(int count = 0 ; count < nb_defi_a_faire ; count ++){
-
-
-                        if(liste_defi_a_faire.get(i).equals("qcm") == true){
-
-                            System.out.println("qc de "+liste_defi_a_faire.get(i-1));
-                            int point  = question.Repondre_QCM(this.moyenne);
+                            System.out.println("qcm de "+liste_defi_a_faire.get(i-1));
+                            int point  = question.Repondre_QCM(this.moyenne); // on fait la question
 
                             if(point > 0 ){ // si on répond bien a la question
 
-                                System.out.println("Bien joué ! -"+point+" points pour "+liste_defi_a_faire.get(i-1));
+                                System.out.println("Défi réussi  -"+point+" points pour "+liste_defi_a_faire.get(i-1));
 
-                                String nom ="";
-                                String mdp ="";
-                                int pv =0;
-                                int moyenne =0;
+                                String new_nom =liste_defi_a_faire.get(i-1);
+                                String new_mdp ="";
+                                int new_pv =0;
+                                int new_moyenne =0;
                                 
                                 try{
 
-                                    BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+liste_defi_a_faire.get(i-1)+".txt")));
+                                    BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+new_nom+".txt")));
                                     String ligne;
-                    
+                                    
+
+                                    /*
+                                     * on récupere les informations de l'avatar pour pouvoir les modifiers
+                                     * puis les écrire
+                                    */
+
                                     while((ligne = reader.readLine()) != null){
                                         if(ligne.startsWith("Nom :")){
                                             String temp[] = ligne.split(":");
-                                            nom=temp[1];
+                                            new_nom=temp[1];
                                         }
 
                                         if(ligne.startsWith("Mdp :")){
                                             String temp[] = ligne.split(":");
-                                            mdp=temp[1];
+                                            new_mdp=temp[1];
                                         }
                     
                                         if(ligne.startsWith("Points de vie :")){
                                             String temp[] = ligne.split(":");
-                                            pv=Integer.parseInt(temp[1]) ;
+                                            new_pv=Integer.parseInt(temp[1])-point;
                                         }
                     
                                         if(ligne.startsWith("Moyenne :")){
                                             String temp[] = ligne.split(":");
-                                            moyenne=Integer.parseInt(temp[1]);
+                                            new_moyenne=Integer.parseInt(temp[1]);
                                         }
                                     }
 
@@ -866,11 +900,12 @@ public class Avatar {
                                     System.out.println(err);
                                 }
 
-                                Ecrire(nom, mdp, pv-point, moyenne);
+
+                                Ecrire(new_nom, new_mdp, new_pv, new_moyenne); // écriture des nouvelles données de l'avatar qui a lancé le défi
 
                             }else{
 
-                                System.out.println("Défi perdu  ... Vous perdez -"+point+" points");
+                                System.out.println("Défi perdu ... Vous perdez "+point+" points");
 
                                 this.point_vie = this.point_vie + point ;
                                 Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
@@ -878,44 +913,49 @@ public class Avatar {
                             } 
                         }
 
-                        if(liste_defi_a_faire.get(i).equals("question")  == true ){
+                        if(liste_defi_a_faire.get(i).equals("question")  == true ){ // si le type == question 
 
                             System.out.println("question de "+liste_defi_a_faire.get(i-1));
-                            int point  = question.Repondre_question(this.moyenne);
+                            int point  = question.Repondre_question(this.moyenne); // on fait le QCM
 
                             if(point > 0 ){ // si on répond bien a la question
 
                                 System.out.println("Bien joué ! -"+point+" points pour "+liste_defi_a_faire.get(i-1));
 
-                                String nom =liste_defi_a_faire.get(i-1);
-                                String mdp ="";
-                                int pv =0;
-                                int moyenne =0;
+                                String new_nom =liste_defi_a_faire.get(i-1);
+                                String new_mdp ="";
+                                int new_pv =0;
+                                int new_moyenne =0;
                                 
                                 try{
 
-                                    BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+liste_defi_a_faire.get(i-1)+".txt")));
+                                    BufferedReader reader = new BufferedReader(new FileReader(new File("Avatars/"+new_nom+".txt")));
                                     String ligne;
+
+                                    /*
+                                     * on récupere les informations de l'avatar qui lance le defi pour pouvoir les modifiers
+                                     * puis les écrire
+                                    */
                     
                                     while((ligne = reader.readLine()) != null){
                                         if(ligne.startsWith("Nom :")){
                                             String temp[] = ligne.split(":");
-                                            nom=temp[1];
+                                            new_nom=temp[1];
                                         }
 
                                         if(ligne.startsWith("Mdp :")){
                                             String temp[] = ligne.split(":");
-                                            mdp=temp[1];
+                                            new_mdp=temp[1];
                                         }
                     
                                         if(ligne.startsWith("Points de vie :")){
                                             String temp[] = ligne.split(":");
-                                            pv=Integer.parseInt(temp[1]) ;
+                                            new_pv=Integer.parseInt(temp[1])-point;
                                         }
                     
                                         if(ligne.startsWith("Moyenne :")){
                                             String temp[] = ligne.split(":");
-                                            moyenne=Integer.parseInt(temp[1]);
+                                            new_moyenne=Integer.parseInt(temp[1]);
                                         }
                                     }
 
@@ -923,45 +963,59 @@ public class Avatar {
                                     System.out.println(err);
                                 }
 
-                                Ecrire(nom, mdp, pv-point, moyenne);
+
+                                Ecrire(new_nom, new_mdp, new_pv, new_moyenne); // écriture des nouvelles données de l'avatar qui a lancé le défi
 
                             }else{
 
-                                System.out.println("Mauvaise réponse ... Vous perdez -"+point+" points");
+                                System.out.println("Mauvaise réponse ... Vous perdez "+point+" points");
 
                                 this.point_vie = this.point_vie + point ;
-                                Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);
+                                Ecrire(this.nom, this.mdp, this.point_vie, this.moyenne);  // écriture des nouvelles données pour l 'avatar connecté
 
                             } 
 
                         }
+
                         
+                        /* 
+                         * On change le "non" en oui
+                         * et on remet le défi dans l'ancienne liste
+                         * 
+                        */
                         liste_defi_a_faire.set(i+1, "oui");
                         contenu_notif.add(liste_defi_a_faire.get(i-1));
                         contenu_notif.add(liste_defi_a_faire.get(i));
                         contenu_notif.add(liste_defi_a_faire.get(i+1));
 
                         
+                        /* 
+                         * on enleve le défi réalisé 
+                        */
                         liste_defi_a_faire.remove(i-1);
                         liste_defi_a_faire.remove(i-1);
                         liste_defi_a_faire.remove(i-1);
 
+                        /* 
+                        for (String n : liste_defi_a_faire){
+                            System.out.println(n);
+                        }
+                        */
                     }   
-                    //
+                
 
-                    /* 
-                    ArrayList<String> lignes = new ArrayList<String>();
+                    ArrayList<String> lignes = new ArrayList<String>(); 
                     String path="Notifications/"+this.nom+".txt";
                     File file = new File(path);
                     
                     
 
-                    for (int j = 2 ; j < contenu_notif.size() ; j +=3){
+                    for (int j = 0 ; j < contenu_notif.size() ; j +=3){
                         
                         
-                        lignes.add("\nFrom :"+contenu_notif.get(j-2));
-                        lignes.add("\nType :"+contenu_notif.get(j-1));
-                        lignes.add("\nFait :"+contenu_notif.get(j));
+                        lignes.add("\nFrom :"+contenu_notif.get(j));
+                        lignes.add("\nType :"+contenu_notif.get(j+1));
+                        lignes.add("\nFait :"+contenu_notif.get(j+2)+"\n");
 
                     }
                     
@@ -978,20 +1032,16 @@ public class Avatar {
                     }
                     
                     
-                    */
-
                     try {
-                        Thread.sleep(90000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
-                    validation = true ;
-
-                    //System.out.print("\033[H\033[2J")   ;
-                    //System.out.flush();
+                    valid = true ;
+                    System.out.print("\033[H\033[2J")   ;
+                    System.out.flush();
                 }
-
 
             } 
 
@@ -1039,12 +1089,12 @@ public class Avatar {
                     System.out.flush();
 
                 }
+
+                
                 
             }
  
 
-            
-           
             if(reponse == 6 ){ // lancer defi
 
                 /*
@@ -1069,7 +1119,7 @@ public class Avatar {
 
                         
                         Scanner scan = new Scanner(System.in);
-                        String nom = scan.nextLine();
+                        String choix = scan.nextLine();
 
 
                         System.out.println("Entrer le type de défi à envoyer ( qestion / qcm)");
@@ -1077,9 +1127,10 @@ public class Avatar {
                         
 
                         ArrayList<String> lignes = new ArrayList<String>();
-                        String path="Notifications/"+nom+".txt";
+                        String path="Notifications/"+choix+".txt";
                         File file = new File(path);
                         
+                        lignes.add("\n");
                         lignes.add("\nFrom :"+this.nom);
                         lignes.add("\nType :"+type);
                         lignes.add("\nFait :non");
@@ -1165,7 +1216,7 @@ public class Avatar {
     
                         }   
                         
-                        System.out.println("Notification \t\tdéfi réalisé:"+count_fait+" \t\tdéfi à faire:"+count_a_faire+"\n");
+                        System.out.println("Notifications \t\tdéfi(s) réalisé(s):"+count_fait+" \t\tdéfi(s) à faire:"+count_a_faire+"\n");
 
                         System.out.printf(" %-20s %-20s %-20s  \n","Lancé par ","Type de défi","Fait ?");
                         System.out.printf("-----------------------------------------------------------------------\n\n");

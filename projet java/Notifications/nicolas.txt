@@ -8,6 +8,5 @@ Type :question
 Fait :oui
 
 From :flo
-Type :question
-Fait :non
-
+Type :qcm
+Fait :oui

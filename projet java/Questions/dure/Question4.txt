@@ -1,0 +1,5 @@
+
+Question :Combien fait 1+1
+bonne_reponse :2
+mauvaise_reponse1 :3
+mauvaise_reponse2 :1
