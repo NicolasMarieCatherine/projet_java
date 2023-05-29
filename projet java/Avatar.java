@@ -782,11 +782,6 @@ public class Avatar {
                         System.out.flush();
                         
                         System.out.println("Vous n'avez aucune notifications ");
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
     
                         valid = true ;
                         System.out.print("\033[H\033[2J")   ;
@@ -1170,8 +1165,8 @@ public class Avatar {
                 System.out.flush();
 
 
-                validation = false ;
-                while (!validation){
+                boolean valid = false ;
+                while (!valid){
 
                     System.out.print("\033[H\033[2J")   ;
                     System.out.flush();
@@ -1238,7 +1233,7 @@ public class Avatar {
                     System.out.print("\033[H\033[2J")   ;
                     System.out.flush();
 
-                    validation = true ;
+                    valid = true ;
                 }
             }
 
