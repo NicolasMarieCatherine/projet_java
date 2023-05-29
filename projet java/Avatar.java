@@ -9,8 +9,6 @@ import Exeptions.LoginException;
 import java.io.*;
 
 /**
- * @author FloFA1998 NicolasMarieCatherine
- * 
  *  Initialisation de la classe Avatar /
  *  nom : Nom de l'avatar    /
  *  mdp : Mot de passe de l'avatar /
