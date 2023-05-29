@@ -84,52 +84,36 @@ public class Main {
 }
     
 
+
+
 /**
  *  *     1 Creer avatar  
  *  *
  *  *     2 Se connecter 
  *  *          |______> verification
  *  *               |______> menu
- *  *                      |______> afficher stat de l'avatar                    - Fait
- *  *                       |______> afficher  les questions du jeu              - Fait  
- *  *                       |______> répondre à une question                     - Fait
- *  !                       |______> répondre à un défi                          - X
- *  *                       |______> répondre à un qcm                           - Fait
- *  *                       |______> voir notification                           - Fait
- *  *                       |______> déconnexion                                 - Fait
+ *  *                      |______> afficher stat de l'avatar                    
+ *  *                       |______> afficher  les questions du jeu              
+ *  *                       |______> répondre à une question                     
+ *  TODO                    |______> répondre à un défi                          - X
+ *  *                       |______> répondre à un qcm                           
+ *  *                       |______> lancer un défi                              
+ *  *                       |______> voir notification                           
+ *  *                       |______> déconnexion                                 
  *  *                        
- *  *      3 Afficher liste avatar                                               - Fait
+ *  *      3 Afficher liste avatar                                              
  *  *       
- *  *      4 Admin                                                               - Fait
- *  *          |______> menu                                                     - Fait
- *  *               |______> afficher liste avatar                               - Fait
- *  *               |______> supprimer avatar                                    - Fait
- *  *               |______> modifier avatar                                     - Fait
- *  *               |______> ajouter question                                    - Fait
- *  *               |______> déconnexion                                         - Fait
+ *  *      4 Admin       
+ *  *         |______> verification                                              
+ *  *          |______> menu                                                     
+ *  *               |______> afficher liste avatar                               
+ *  *               |______> supprimer avatar                                    
+ *  *               |______> modifier avatar                                     
+ *  *               |______> ajouter question                                    
+ *  *               |______> déconnexion 
+ *  *                                         
  *  *
- *  *      5 Quitter                                                             - Fait
- *  *
- *  *
- *  *
- *  *       
- *  *       Ajouter un delay (ms)
- *  *
- *  *       try {    
- *  *           Thread.sleep(2000);
- *  *       } catch (InterruptedException e) {
- *  *           e.printStackTrace();
- *  *       }
- *  * 
- *  *
- *  *       
- *  *                   
- *  *       Nettoyer la console
- *  *   
- *  *       System.out.print("\033[H\033[2J")   ;
- *  *       System.out.flush();
- *  *
- *  *
+ *  *      5 Quitter                                                             
  *  *
  *  *
  *  *

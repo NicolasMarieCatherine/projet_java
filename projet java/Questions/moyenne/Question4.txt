@@ -1,0 +1,5 @@
+
+Question :Combien fait 2+3
+bonne_reponse :5
+mauvaise_reponse1 :4
+mauvaise_reponse2 :6

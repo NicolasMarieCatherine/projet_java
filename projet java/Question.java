@@ -43,8 +43,8 @@ public class Question {
 
         
         
-        if (moyenne <= 10 ){ this.difficulte = "facile" ; this.point = 10;}
-        if (10 < moyenne  && moyenne < 14 ){ this.difficulte="moyenne";  this.point = 15;}
+        if (moyenne <= 10 ){ this.difficulte = "facile" ; this.point = 5;}
+        if (10 < moyenne  && moyenne < 14 ){ this.difficulte="moyenne";  this.point = 10;}
         if (moyenne >= 14 ){ this.difficulte="dure"; this.point = 15 ;}
 
         try{
