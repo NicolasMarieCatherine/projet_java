@@ -1114,6 +1114,21 @@ public class Avatar {
                         Scanner scan = new Scanner(System.in);
                         String choix = scan.nextLine();
 
+                        if(Est_vivant(choix) == false){
+
+                            System.out.print("\033[H\033[2J")   ;
+                            System.out.flush();
+
+                            System.out.println("L'avatar ciblé n'a plus de vie ! . Retour...");
+
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            
+                            validation = true ;
+                        }
 
                         System.out.println("Entrer le type de défi à envoyer ( qestion / qcm)");
                         String type = scan.nextLine();
