@@ -1,5 +1,0 @@
-
-Nom :flo
-Mdp :flo
-Points de vie :150
-Moyenne :10
